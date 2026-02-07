@@ -867,6 +867,99 @@
     50% { box-shadow: 0 0 0 16px rgba(216,167,177,0); }
   }
 
+  /* ---- FAQ ---- */
+  .faq-section {
+    background: var(--soft-cream);
+  }
+
+  .faq-list {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--warm-sand);
+  }
+
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    padding: 24px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink-black);
+    transition: color 0.3s;
+  }
+
+  .faq-question:hover {
+    color: var(--petal-rose);
+  }
+
+  .faq-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+
+  .faq-icon::before,
+  .faq-icon::after {
+    content: '';
+    position: absolute;
+    background: var(--petal-rose);
+    transition: transform 0.3s;
+  }
+
+  .faq-icon::before {
+    width: 16px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .faq-icon::after {
+    width: 2px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .faq-item.active .faq-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 500px;
+    padding-bottom: 24px;
+  }
+
+  .faq-answer p {
+    font-size: 15px;
+    color: var(--slate-taupe);
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .faq-answer p + p {
+    margin-top: 12px;
+  }
+
   /* ---- RESPONSIVE ---- */
   @media (max-width: 768px) {
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -874,6 +967,7 @@
     .comp-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
     .section { padding: 72px 20px; }
+    .faq-question { font-size: 18px; }
   }
 </style>
 </head>
@@ -1044,6 +1138,87 @@
   </div>
 </section>
 
+<!-- ==================== FAQ ==================== -->
+<section class="section faq-section">
+  <div class="section-inner">
+    <div class="section-label">Questions</div>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="section-divider"></div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What are the working hours?
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <p><strong>10:00 AM to 6:00 PM Pacific Time (US)</strong>, Monday through Friday. This translates to night shift hours in the Philippines (approximately 1:00 AM to 9:00 AM PHT, depending on daylight saving time).</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is this a full-time or part-time position?
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <p>This is a <strong>full-time position</strong> — 40 hours per week, 8 hours per day. We're looking for someone who wants long-term stability, not a side gig.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Do I need experience in aesthetics or healthcare?
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <p>Not required, but helpful. What matters most is your phone presence, warmth, and ability to make people feel comfortable. We'll train you on the services — you just need to be great with people.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How do I get paid?
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <p>Payment is made monthly via your preferred method (Wise, PayPal, or direct bank transfer). Your base pay is guaranteed, and bonuses are calculated based on confirmed bookings and patient shows.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What equipment do I need?
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <p>You'll need a computer, reliable high-speed internet, a quiet workspace for calls, and a headset with a good microphone. We provide all software, phone systems, and training.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Why is the voice recording so important?
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <p>Because this role is all about how you sound on the phone. Your resume tells us your background, but your voice tells us if you're the right fit. We want to hear your natural warmth, clarity, and energy — the same qualities our patients will experience.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How quickly will I hear back?
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <p>We review every application personally. If your experience and voice recording are a good fit, we'll reach out via WhatsApp within 5 business days to schedule a conversation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== APPLICATION ==================== -->
 <section class="section apply-section" id="apply">
   <div class="section-inner">
@@ -1181,6 +1356,20 @@
   // ============ CONFIGURATION ============
   // Replace with your Google Apps Script Web App URL after setup
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyucdkBzPJlixOclPhNCz7c2FkVLCE9gonck3vHHhZcZzXeThd52RsuxPpLEWcAdD0T/exec';
+
+  // ---- FAQ Toggle ----
+  function toggleFaq(button) {
+    const item = button.parentElement;
+    const isActive = item.classList.contains('active');
+
+    // Close all other items
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+    // Toggle current item
+    if (!isActive) {
+      item.classList.add('active');
+    }
+  }
 
   // ---- File Upload Handling ----
   function setupUploadZone(zoneId, inputId, filenameId) {
