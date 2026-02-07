@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — MedGlo Applications</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory-blush: #F7ECE9;
+    --warm-sand: #EBD8C3;
+    --petal-rose: #D8A7B1;
+    --slate-taupe: #6B6F72;
+    --ink-black: #1B1B1B;
+    --pure-white: #FFFFFF;
+    --soft-cream: #FDF9F7;
+    --success-green: #4CAF50;
+    --warning-orange: #FF9800;
+    --danger-red: #f44336;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--ink-black);
+    background: var(--soft-cream);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Login Screen */
+  .login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient(170deg, var(--ivory-blush) 0%, var(--soft-cream) 100%);
+  }
+
+  .login-box {
+    background: var(--pure-white);
+    padding: 48px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+
+  .login-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+
+  .login-subtitle {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--slate-taupe);
+    margin-bottom: 40px;
+  }
+
+  .login-input {
+    width: 100%;
+    padding: 14px 18px;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    border: 1px solid var(--warm-sand);
+    outline: none;
+    margin-bottom: 16px;
+    transition: border-color 0.3s;
+  }
+
+  .login-input:focus {
+    border-color: var(--petal-rose);
+  }
+
+  .login-btn {
+    width: 100%;
+    padding: 14px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--ink-black);
+    color: var(--pure-white);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .login-btn:hover {
+    background: var(--slate-taupe);
+  }
+
+  .login-error {
+    color: var(--danger-red);
+    font-size: 13px;
+    margin-top: 16px;
+    display: none;
+  }
+
+  /* Dashboard */
+  .dashboard {
+    display: none;
+  }
+
+  .dashboard.active {
+    display: block;
+  }
+
+  .login-screen.hidden {
+    display: none;
+  }
+
+  /* Header */
+  .header {
+    background: var(--ink-black);
+    color: var(--pure-white);
+    padding: 20px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .header-stats {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .header-stats strong {
+    color: var(--petal-rose);
+  }
+
+  .logout-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .logout-btn:hover {
+    color: var(--pure-white);
+    border-color: var(--pure-white);
+  }
+
+  /* Filters */
+  .filters {
+    padding: 24px 32px;
+    background: var(--pure-white);
+    border-bottom: 1px solid var(--ivory-blush);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: 1px solid var(--warm-sand);
+    background: var(--pure-white);
+    color: var(--slate-taupe);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--ink-black);
+    color: var(--pure-white);
+    border-color: var(--ink-black);
+  }
+
+  .filter-btn .count {
+    display: inline-block;
+    background: var(--petal-rose);
+    color: var(--pure-white);
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 6px;
+  }
+
+  .filter-btn.active .count {
+    background: var(--pure-white);
+    color: var(--ink-black);
+  }
+
+  .search-box {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+  }
+
+  .search-input {
+    padding: 10px 16px;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    border: 1px solid var(--warm-sand);
+    outline: none;
+    min-width: 250px;
+  }
+
+  .search-input:focus {
+    border-color: var(--petal-rose);
+  }
+
+  /* Applications List */
+  .applications {
+    padding: 32px;
+  }
+
+  .app-card {
+    background: var(--pure-white);
+    margin-bottom: 16px;
+    border: 1px solid var(--ivory-blush);
+    transition: box-shadow 0.3s;
+  }
+
+  .app-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+
+  .app-header {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+
+  .app-card.expanded .app-header {
+    border-bottom-color: var(--ivory-blush);
+  }
+
+  .app-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .app-meta {
+    font-size: 13px;
+    color: var(--slate-taupe);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .app-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .app-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .status-badge {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 3px;
+  }
+
+  .status-new {
+    background: var(--petal-rose);
+    color: var(--pure-white);
+  }
+
+  .status-reviewing {
+    background: var(--warning-orange);
+    color: var(--pure-white);
+  }
+
+  .status-shortlisted {
+    background: var(--success-green);
+    color: var(--pure-white);
+  }
+
+  .status-rejected {
+    background: var(--slate-taupe);
+    color: var(--pure-white);
+  }
+
+  .expand-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--slate-taupe);
+    transition: transform 0.3s;
+  }
+
+  .app-card.expanded .expand-icon {
+    transform: rotate(180deg);
+  }
+
+  /* Expanded Content */
+  .app-details {
+    display: none;
+    padding: 24px;
+    background: var(--soft-cream);
+  }
+
+  .app-card.expanded .app-details {
+    display: block;
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .detail-section h4 {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--petal-rose);
+    margin-bottom: 8px;
+  }
+
+  .detail-section p {
+    font-size: 15px;
+    color: var(--ink-black);
+  }
+
+  .detail-section a {
+    color: var(--petal-rose);
+    text-decoration: none;
+  }
+
+  .detail-section a:hover {
+    text-decoration: underline;
+  }
+
+  .voice-player {
+    margin-top: 8px;
+  }
+
+  .voice-player audio {
+    width: 100%;
+    height: 40px;
+  }
+
+  .why-text {
+    background: var(--pure-white);
+    padding: 20px;
+    border-left: 3px solid var(--petal-rose);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* Action Buttons */
+  .app-action-bar {
+    display: flex;
+    gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid var(--ivory-blush);
+    margin-top: 24px;
+  }
+
+  .action-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .action-btn.primary {
+    background: var(--ink-black);
+    color: var(--pure-white);
+  }
+
+  .action-btn.primary:hover {
+    background: var(--slate-taupe);
+  }
+
+  .action-btn.secondary {
+    background: var(--pure-white);
+    color: var(--ink-black);
+    border: 1px solid var(--warm-sand);
+  }
+
+  .action-btn.secondary:hover {
+    border-color: var(--ink-black);
+  }
+
+  .action-btn.danger {
+    background: var(--pure-white);
+    color: var(--danger-red);
+    border: 1px solid var(--danger-red);
+  }
+
+  .action-btn.danger:hover {
+    background: var(--danger-red);
+    color: var(--pure-white);
+  }
+
+  /* Notes */
+  .notes-section {
+    margin-top: 24px;
+  }
+
+  .notes-section h4 {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--petal-rose);
+    margin-bottom: 12px;
+  }
+
+  .notes-input {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    border: 1px solid var(--warm-sand);
+    outline: none;
+    resize: vertical;
+    min-height: 80px;
+    margin-bottom: 12px;
+  }
+
+  .notes-input:focus {
+    border-color: var(--petal-rose);
+  }
+
+  .save-notes-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    background: var(--petal-rose);
+    color: var(--pure-white);
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 80px 24px;
+    color: var(--slate-taupe);
+  }
+
+  .empty-state h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: var(--ink-black);
+  }
+
+  /* Loading */
+  .loading {
+    text-align: center;
+    padding: 60px;
+    color: var(--slate-taupe);
+  }
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--ivory-blush);
+    border-top-color: var(--petal-rose);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 16px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header { flex-direction: column; gap: 16px; text-align: center; }
+    .filters { flex-direction: column; }
+    .search-box { margin-left: 0; width: 100%; }
+    .search-input { width: 100%; }
+    .detail-grid { grid-template-columns: 1fr; }
+    .app-action-bar { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">MEDGLO</div>
+    <div class="login-subtitle">Admin Dashboard</div>
+    <input type="password" class="login-input" id="passwordInput" placeholder="Enter password" onkeypress="if(event.key==='Enter')attemptLogin()">
+    <button class="login-btn" onclick="attemptLogin()">Sign In</button>
+    <div class="login-error" id="loginError">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div class="dashboard" id="dashboard">
+  <header class="header">
+    <div class="header-logo">MEDGLO</div>
+    <div class="header-right">
+      <div class="header-stats">
+        <strong id="totalCount">0</strong> applications
+      </div>
+      <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">
+      All <span class="count" id="countAll">0</span>
+    </button>
+    <button class="filter-btn" data-filter="new" onclick="setFilter('new')">
+      New <span class="count" id="countNew">0</span>
+    </button>
+    <button class="filter-btn" data-filter="reviewing" onclick="setFilter('reviewing')">
+      Reviewing <span class="count" id="countReviewing">0</span>
+    </button>
+    <button class="filter-btn" data-filter="shortlisted" onclick="setFilter('shortlisted')">
+      Shortlisted <span class="count" id="countShortlisted">0</span>
+    </button>
+    <button class="filter-btn" data-filter="rejected" onclick="setFilter('rejected')">
+      Rejected <span class="count" id="countRejected">0</span>
+    </button>
+    <div class="search-box">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search by name or email..." oninput="filterApplications()">
+    </div>
+  </div>
+
+  <div class="applications" id="applicationsList">
+    <div class="loading" id="loadingState">
+      <div class="loading-spinner"></div>
+      <p>Loading applications...</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ============ CONFIGURATION ============
+  // IMPORTANT: Replace this with your actual Google Apps Script Web App URL after setup
+  const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+
+  // Simple password protection (in production, use proper auth)
+  // Change this to your desired password
+  const ADMIN_PASSWORD = 'medglo2024';
+
+  // ============ STATE ============
+  let applications = [];
+  let currentFilter = 'all';
+  let isLoggedIn = false;
+
+  // ============ AUTH ============
+  function attemptLogin() {
+    const password = document.getElementById('passwordInput').value;
+    if (password === ADMIN_PASSWORD) {
+      isLoggedIn = true;
+      sessionStorage.setItem('medglo_admin_auth', 'true');
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('dashboard').classList.add('active');
+      loadApplications();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+      document.getElementById('passwordInput').value = '';
+    }
+  }
+
+  function logout() {
+    isLoggedIn = false;
+    sessionStorage.removeItem('medglo_admin_auth');
+    document.getElementById('loginScreen').classList.remove('hidden');
+    document.getElementById('dashboard').classList.remove('active');
+    document.getElementById('passwordInput').value = '';
+  }
+
+  function checkAuth() {
+    if (sessionStorage.getItem('medglo_admin_auth') === 'true') {
+      isLoggedIn = true;
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('dashboard').classList.add('active');
+      loadApplications();
+    }
+  }
+
+  // ============ DATA LOADING ============
+  async function loadApplications() {
+    const container = document.getElementById('applicationsList');
+    container.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Loading applications...</p></div>';
+
+    try {
+      // If Google Script URL is not set, show demo data
+      if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+        // Demo data for testing
+        applications = getDemoData();
+        renderApplications();
+        updateCounts();
+        return;
+      }
+
+      const response = await fetch(GOOGLE_SCRIPT_URL + '?action=getAll');
+      const data = await response.json();
+
+      if (data.success) {
+        applications = data.applications || [];
+      } else {
+        applications = [];
+      }
+
+      renderApplications();
+      updateCounts();
+    } catch (error) {
+      console.error('Error loading applications:', error);
+      container.innerHTML = '<div class="empty-state"><h3>Connection Error</h3><p>Could not load applications. Please check your Google Script URL configuration.</p></div>';
+    }
+  }
+
+  function getDemoData() {
+    return [
+      {
+        id: '1',
+        firstName: 'Maria',
+        lastName: 'Santos',
+        email: 'maria.santos@email.com',
+        phone: '+63 912 345 6789',
+        location: 'Manila, Philippines',
+        whyThisRole: 'I have 5 years of experience in customer service and I love helping people feel confident about themselves. The emphasis on warmth and genuine connection really resonates with me - that\'s exactly how I approach every interaction.',
+        resumeUrl: '#',
+        voiceUrl: '#',
+        status: 'new',
+        submittedAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+        notes: ''
+      },
+      {
+        id: '2',
+        firstName: 'Ana',
+        lastName: 'Reyes',
+        email: 'ana.reyes@email.com',
+        phone: '+63 917 888 9999',
+        location: 'Cebu City, Philippines',
+        whyThisRole: 'I\'ve worked night shifts for 3 years in a medical clinic and I thrive in that schedule. The idea of working with a physician-led practice that values quality over quantity is exactly what I\'ve been looking for.',
+        resumeUrl: '#',
+        voiceUrl: '#',
+        status: 'reviewing',
+        submittedAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+        notes: 'Great phone presence. Schedule a call.'
+      },
+      {
+        id: '3',
+        firstName: 'Jessica',
+        lastName: 'Cruz',
+        email: 'jessica.cruz@email.com',
+        phone: '+63 918 777 5555',
+        location: 'Davao, Philippines',
+        whyThisRole: 'The compensation structure really appeals to me because I\'m confident in my ability to connect with patients and help them feel comfortable. I want a role where my effort directly impacts my earnings.',
+        resumeUrl: '#',
+        voiceUrl: '#',
+        status: 'shortlisted',
+        submittedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+        notes: 'Excellent candidate. Second interview scheduled for Monday.'
+      }
+    ];
+  }
+
+  // ============ RENDERING ============
+  function renderApplications() {
+    const container = document.getElementById('applicationsList');
+    const filtered = filterByStatusAndSearch();
+
+    if (filtered.length === 0) {
+      container.innerHTML = '<div class="empty-state"><h3>No Applications Found</h3><p>No applications match your current filters.</p></div>';
+      return;
+    }
+
+    container.innerHTML = filtered.map(app => `
+      <div class="app-card" data-id="${app.id}">
+        <div class="app-header" onclick="toggleExpand('${app.id}')">
+          <div class="app-info">
+            <h3>${app.firstName} ${app.lastName}</h3>
+            <div class="app-meta">
+              <span>${app.email}</span>
+              <span>${app.phone}</span>
+              <span>${app.location || 'Location not provided'}</span>
+              <span>${formatDate(app.submittedAt)}</span>
+            </div>
+          </div>
+          <div class="app-actions">
+            <span class="status-badge status-${app.status}">${app.status}</span>
+            <div class="expand-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="app-details">
+          <div class="detail-grid">
+            <div class="detail-section">
+              <h4>Contact Information</h4>
+              <p><strong>Email:</strong> <a href="mailto:${app.email}">${app.email}</a></p>
+              <p><strong>WhatsApp:</strong> <a href="https://wa.me/${app.phone.replace(/[^0-9]/g, '')}">${app.phone}</a></p>
+              <p><strong>Location:</strong> ${app.location || 'Not provided'}</p>
+            </div>
+            <div class="detail-section">
+              <h4>Attachments</h4>
+              <p><a href="${app.resumeUrl}" target="_blank">View Resume/CV</a></p>
+              <div class="voice-player">
+                <p><strong>Voice Recording:</strong></p>
+                ${app.voiceUrl ? `<audio controls src="${app.voiceUrl}"></audio>` : '<p style="color: var(--slate-taupe); font-size: 13px;">No voice recording available</p>'}
+              </div>
+            </div>
+          </div>
+          <div class="detail-section">
+            <h4>Why This Role Appeals to Them</h4>
+            <div class="why-text">${app.whyThisRole || 'No response provided'}</div>
+          </div>
+          <div class="notes-section">
+            <h4>Your Notes</h4>
+            <textarea class="notes-input" id="notes-${app.id}" placeholder="Add notes about this candidate...">${app.notes || ''}</textarea>
+            <button class="save-notes-btn" onclick="saveNotes('${app.id}')">Save Notes</button>
+          </div>
+          <div class="app-action-bar">
+            <button class="action-btn primary" onclick="updateStatus('${app.id}', 'shortlisted')">Shortlist</button>
+            <button class="action-btn secondary" onclick="updateStatus('${app.id}', 'reviewing')">Mark Reviewing</button>
+            <button class="action-btn danger" onclick="updateStatus('${app.id}', 'rejected')">Reject</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function filterByStatusAndSearch() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+    return applications.filter(app => {
+      const matchesFilter = currentFilter === 'all' || app.status === currentFilter;
+      const matchesSearch = !searchTerm ||
+        app.firstName.toLowerCase().includes(searchTerm) ||
+        app.lastName.toLowerCase().includes(searchTerm) ||
+        app.email.toLowerCase().includes(searchTerm);
+      return matchesFilter && matchesSearch;
+    });
+  }
+
+  function updateCounts() {
+    document.getElementById('totalCount').textContent = applications.length;
+    document.getElementById('countAll').textContent = applications.length;
+    document.getElementById('countNew').textContent = applications.filter(a => a.status === 'new').length;
+    document.getElementById('countReviewing').textContent = applications.filter(a => a.status === 'reviewing').length;
+    document.getElementById('countShortlisted').textContent = applications.filter(a => a.status === 'shortlisted').length;
+    document.getElementById('countRejected').textContent = applications.filter(a => a.status === 'rejected').length;
+  }
+
+  // ============ INTERACTIONS ============
+  function toggleExpand(id) {
+    const card = document.querySelector(`.app-card[data-id="${id}"]`);
+    card.classList.toggle('expanded');
+  }
+
+  function setFilter(filter) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.filter === filter);
+    });
+    renderApplications();
+  }
+
+  function filterApplications() {
+    renderApplications();
+  }
+
+  async function updateStatus(id, newStatus) {
+    const app = applications.find(a => a.id === id);
+    if (!app) return;
+
+    app.status = newStatus;
+    renderApplications();
+    updateCounts();
+
+    // Save to Google Sheets if configured
+    if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify({ action: 'updateStatus', id, status: newStatus })
+        });
+      } catch (error) {
+        console.error('Error updating status:', error);
+      }
+    }
+  }
+
+  async function saveNotes(id) {
+    const notes = document.getElementById(`notes-${id}`).value;
+    const app = applications.find(a => a.id === id);
+    if (!app) return;
+
+    app.notes = notes;
+
+    // Save to Google Sheets if configured
+    if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify({ action: 'updateNotes', id, notes })
+        });
+      } catch (error) {
+        console.error('Error saving notes:', error);
+      }
+    }
+
+    // Visual feedback
+    const btn = event.target;
+    btn.textContent = 'Saved!';
+    setTimeout(() => btn.textContent = 'Save Notes', 2000);
+  }
+
+  // ============ UTILITIES ============
+  function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    if (diffHours < 1) return 'Just now';
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 7) return `${diffDays} days ago`;
+
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  // ============ INIT ============
+  checkAuth();
+</script>
+
+</body>
+</html>

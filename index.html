@@ -1,504 +1,1379 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join MedGlo – Patient Coordinator Position</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --ivory-blush: #F7ECE9;
-            --warm-sand: #EBD8C3;
-            --petal-rose: #D8A7B1;
-            --slate-taupe: #6B6F72;
-            --ink-black: #1B1B1B;
-            --pure-white: #FFFFFF;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Our Team — MedGlo Aesthetic Medicine & Wellness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory-blush: #F7ECE9;
+    --warm-sand: #EBD8C3;
+    --petal-rose: #D8A7B1;
+    --slate-taupe: #6B6F72;
+    --ink-black: #1B1B1B;
+    --pure-white: #FFFFFF;
+    --soft-cream: #FDF9F7;
+    --rose-light: #F0D4DA;
+    --sand-dark: #C9B5A0;
+  }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Nunito Sans', sans-serif;
-            background: var(--ivory-blush);
-            color: var(--ink-black);
-            line-height: 1.7;
-            font-weight: 400;
-        }
+  html { scroll-behavior: smooth; }
 
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 60px 24px 80px;
-        }
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    color: var(--ink-black);
+    background: var(--soft-cream);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
 
-        .header {
-            text-align: center;
-            margin-bottom: 56px;
-            animation: fadeUp 0.8s ease-out;
-        }
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+    background: linear-gradient(
+      170deg,
+      var(--ivory-blush) 0%,
+      var(--soft-cream) 40%,
+      var(--pure-white) 100%
+    );
+    position: relative;
+    overflow: hidden;
+  }
 
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--petal-rose) 0%, transparent 70%);
+    opacity: 0.15;
+    pointer-events: none;
+  }
 
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            color: var(--ink-black);
-            margin-bottom: 8px;
-        }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -15%;
+    left: -5%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--warm-sand) 0%, transparent 70%);
+    opacity: 0.2;
+    pointer-events: none;
+  }
 
-        .tagline {
-            font-size: 0.85rem;
-            color: var(--slate-taupe);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            font-weight: 500;
-        }
+  .hero-badge {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--petal-rose);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
 
-        .hero {
-            background: var(--pure-white);
-            border-radius: 2px;
-            padding: 48px 40px;
-            margin-bottom: 32px;
-            box-shadow: 0 1px 3px rgba(27, 27, 27, 0.04);
-            animation: fadeUp 0.8s ease-out 0.1s both;
-        }
+  .hero-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(42px, 7vw, 72px);
+    letter-spacing: 6px;
+    color: var(--ink-black);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
 
-        .position-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.9rem;
-            font-weight: 500;
-            color: var(--ink-black);
-            margin-bottom: 8px;
-            line-height: 1.3;
-        }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: var(--slate-taupe);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
 
-        .position-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 28px;
-            padding-bottom: 28px;
-            border-bottom: 1px solid var(--warm-sand);
-        }
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--petal-rose);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.7s forwards;
+  }
 
-        .meta-item {
-            font-size: 0.9rem;
-            color: var(--slate-taupe);
-        }
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 4.5vw, 48px);
+    line-height: 1.3;
+    color: var(--ink-black);
+    max-width: 700px;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
 
-        .meta-item strong {
-            color: var(--ink-black);
-            font-weight: 600;
-        }
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--slate-taupe);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+  }
 
-        .intro-text {
-            font-size: 1.05rem;
-            color: var(--slate-taupe);
-            margin-bottom: 0;
-        }
+  .hero-cta {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--pure-white);
+    background: var(--ink-black);
+    padding: 16px 48px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.2s forwards;
+  }
 
-        .intro-text strong {
-            color: var(--ink-black);
-        }
+  .hero-cta:hover {
+    background: var(--slate-taupe);
+    transform: translateY(-2px);
+  }
 
-        .section {
-            background: var(--pure-white);
-            border-radius: 2px;
-            padding: 40px;
-            margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(27, 27, 27, 0.04);
-            animation: fadeUp 0.8s ease-out 0.2s both;
-        }
+  /* ---- CLINIC SECTION ---- */
+  .section {
+    padding: 100px 24px;
+  }
 
-        .section:nth-child(4) { animation-delay: 0.25s; }
-        .section:nth-child(5) { animation-delay: 0.3s; }
-        .section:nth-child(6) { animation-delay: 0.35s; }
+  .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: var(--ink-black);
-            margin-bottom: 20px;
-        }
+  .section-label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--petal-rose);
+    margin-bottom: 24px;
+    text-align: center;
+  }
 
-        .section p {
-            color: var(--slate-taupe);
-            margin-bottom: 16px;
-        }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 42px);
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
 
-        .section p:last-child {
-            margin-bottom: 0;
-        }
+  .section-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--petal-rose);
+    margin: 0 auto 48px;
+  }
 
-        .highlight-box {
-            background: var(--ivory-blush);
-            padding: 24px 28px;
-            border-left: 3px solid var(--petal-rose);
-            margin: 24px 0;
-        }
+  /* ---- ABOUT CLINIC ---- */
+  .about-clinic {
+    background: var(--pure-white);
+  }
 
-        .highlight-box p {
-            font-style: italic;
-            margin: 0;
-            color: var(--ink-black);
-        }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 48px;
+  }
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
+  .about-image-container {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+  }
 
-        li {
-            position: relative;
-            padding-left: 24px;
-            margin-bottom: 12px;
-            color: var(--slate-taupe);
-        }
+  .about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
 
-        li:last-child {
-            margin-bottom: 0;
-        }
+  /* ---- CLINIC VIDEO SECTION ---- */
+  .video-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: var(--ink-black);
+  }
 
-        li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            width: 8px;
-            height: 8px;
-            background: var(--petal-rose);
-            border-radius: 50%;
-        }
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    max-height: 70vh;
+    overflow: hidden;
+  }
 
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
+  .video-wrapper video {
+    width: 100%;
+    display: block;
+  }
 
-        @media (max-width: 600px) {
-            .two-column {
-                grid-template-columns: 1fr;
-            }
-        }
+  .video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(27,27,27,0.3) 0%,
+      rgba(27,27,27,0.05) 40%,
+      rgba(27,27,27,0.05) 60%,
+      rgba(27,27,27,0.4) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
 
-        .column-title {
-            font-weight: 600;
-            color: var(--ink-black);
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-        }
+  .video-overlay-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(18px, 3vw, 28px);
+    color: var(--pure-white);
+    text-align: center;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    padding: 0 24px;
+    max-width: 600px;
+    line-height: 1.5;
+  }
 
-        .contact-section {
-            background: var(--ink-black);
-            color: var(--pure-white);
-            padding: 48px 40px;
-            text-align: center;
-            animation: fadeUp 0.8s ease-out 0.4s both;
-        }
+  .video-caption {
+    text-align: center;
+    padding: 24px;
+    background: var(--ink-black);
+  }
 
-        .contact-section .section-title {
-            color: var(--pure-white);
-            margin-bottom: 16px;
-        }
+  .video-caption p {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
 
-        .contact-section p {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 32px;
-        }
+  .about-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
 
-        .contact-methods {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            align-items: center;
-        }
+  .about-text .credential {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--petal-rose);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
 
-        .contact-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--pure-white);
-            text-decoration: none;
-            font-size: 1.05rem;
-            padding: 14px 32px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            min-width: 280px;
-            justify-content: center;
-        }
+  .about-text p {
+    font-size: 15px;
+    color: var(--slate-taupe);
+    margin-bottom: 16px;
+    line-height: 1.8;
+  }
 
-        .contact-link:hover {
-            background: var(--pure-white);
-            color: var(--ink-black);
-            border-color: var(--pure-white);
-        }
+  .testimonial-strip {
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--ivory-blush);
+  }
 
-        .contact-link svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-        }
+  .testimonial-strip blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-black);
+    line-height: 1.6;
+  }
 
-        .footer {
-            text-align: center;
-            padding: 40px 24px;
-            color: var(--slate-taupe);
-            font-size: 0.85rem;
-        }
+  .testimonial-strip cite {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    color: var(--petal-rose);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
 
-        .footer a {
-            color: var(--petal-rose);
-            text-decoration: none;
-        }
+  /* ---- THE ROLE ---- */
+  .role-section {
+    background: var(--soft-cream);
+  }
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
+  .role-content {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
 
-        .comp-table {
-            margin: 24px 0;
-            border: 1px solid var(--warm-sand);
-            border-radius: 2px;
-            overflow: hidden;
-        }
+  .role-content p {
+    font-size: 16px;
+    color: var(--slate-taupe);
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
 
-        .comp-row {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr 0.8fr;
-            padding: 14px 20px;
-            border-bottom: 1px solid var(--warm-sand);
-            font-size: 0.95rem;
-        }
+  .role-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-black);
+    line-height: 1.5;
+    margin: 40px 0;
+    padding: 32px 0;
+    border-top: 1px solid var(--rose-light);
+    border-bottom: 1px solid var(--rose-light);
+  }
 
-        .comp-row:last-child {
-            border-bottom: none;
-        }
+  /* ---- DETAILS CARDS ---- */
+  .details-section {
+    background: var(--pure-white);
+  }
 
-        .comp-header {
-            background: var(--ivory-blush);
-            font-weight: 600;
-            color: var(--ink-black);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 48px;
+  }
 
-        .comp-row span:last-child {
-            text-align: right;
-            font-weight: 500;
-        }
+  .detail-card {
+    padding: 40px;
+    background: var(--soft-cream);
+    border: 1px solid var(--ivory-blush);
+    transition: transform 0.3s ease;
+  }
 
-        .comp-total {
-            background: var(--ink-black);
-            color: var(--pure-white);
-        }
+  .detail-card:hover {
+    transform: translateY(-4px);
+  }
 
-        .comp-total span:last-child {
-            color: var(--petal-rose);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
+  .detail-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--ink-black);
+  }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 40px 16px 60px;
-            }
+  .detail-card ul {
+    list-style: none;
+    padding: 0;
+  }
 
-            .hero, .section {
-                padding: 32px 24px;
-            }
+  .detail-card li {
+    font-size: 14px;
+    color: var(--slate-taupe);
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
 
-            .contact-section {
-                padding: 40px 24px;
-            }
+  .detail-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--petal-rose);
+  }
 
-            .position-title {
-                font-size: 1.6rem;
-            }
+  /* ---- COMPENSATION ---- */
+  .comp-section {
+    background: var(--ink-black);
+    color: var(--pure-white);
+  }
 
-            .contact-link {
-                min-width: 100%;
-            }
+  .comp-section .section-label { color: var(--petal-rose); }
+  .comp-section .section-title { color: var(--pure-white); }
+  .comp-section .section-divider { background: var(--petal-rose); }
 
-            .comp-row {
-                grid-template-columns: 1fr 1fr 0.7fr;
-                padding: 12px 14px;
-                font-size: 0.85rem;
-                gap: 8px;
-            }
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
 
-            .comp-header {
-                font-size: 0.75rem;
-            }
+  .comp-item {
+    text-align: center;
+    padding: 40px 24px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
 
-            .comp-total span:last-child {
-                font-size: 1rem;
-            }
-        }
-    </style>
+  .comp-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--petal-rose);
+    margin-bottom: 8px;
+  }
+
+  .comp-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 12px;
+  }
+
+  .comp-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+
+  .comp-example {
+    text-align: center;
+    padding: 32px;
+    border: 1px solid var(--petal-rose);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .comp-example-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--petal-rose);
+    margin-bottom: 8px;
+  }
+
+  .comp-example-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--pure-white);
+    margin-bottom: 8px;
+  }
+
+  .comp-example-detail {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ---- APPLICATION FORM ---- */
+  .apply-section {
+    background: linear-gradient(
+      170deg,
+      var(--ivory-blush) 0%,
+      var(--soft-cream) 50%,
+      var(--pure-white) 100%
+    );
+    padding: 100px 24px 120px;
+  }
+
+  .apply-form-container {
+    max-width: 620px;
+    margin: 0 auto;
+    margin-top: 48px;
+  }
+
+  .form-group {
+    margin-bottom: 32px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-black);
+    margin-bottom: 10px;
+  }
+
+  .form-group label .required {
+    color: var(--petal-rose);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--ink-black);
+    background: var(--pure-white);
+    border: 1px solid var(--warm-sand);
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--petal-rose);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.7;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--sand-dark);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* Upload zones */
+  .upload-zone {
+    border: 2px dashed var(--warm-sand);
+    padding: 40px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--pure-white);
+    position: relative;
+  }
+
+  .upload-zone:hover {
+    border-color: var(--petal-rose);
+    background: var(--ivory-blush);
+  }
+
+  .upload-zone.dragover {
+    border-color: var(--petal-rose);
+    background: var(--ivory-blush);
+  }
+
+  .upload-zone.has-file {
+    border-style: solid;
+    border-color: var(--petal-rose);
+    background: var(--ivory-blush);
+  }
+
+  .upload-zone input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .upload-icon {
+    margin-bottom: 16px;
+  }
+
+  .upload-icon svg {
+    width: 36px;
+    height: 36px;
+    stroke: var(--petal-rose);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .upload-title {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-black);
+    margin-bottom: 6px;
+  }
+
+  .upload-hint {
+    font-size: 12px;
+    color: var(--slate-taupe);
+  }
+
+  .upload-filename {
+    font-size: 13px;
+    color: var(--petal-rose);
+    font-weight: 400;
+    margin-top: 8px;
+    display: none;
+  }
+
+  .upload-zone.has-file .upload-filename {
+    display: block;
+  }
+
+  .upload-zone.has-file .upload-hint {
+    display: none;
+  }
+
+  /* Voice recorder */
+  .voice-section {
+    margin-top: 8px;
+  }
+
+  .voice-option-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 0;
+  }
+
+  .voice-tab {
+    flex: 1;
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: var(--pure-white);
+    border: 1px solid var(--warm-sand);
+    color: var(--slate-taupe);
+    transition: all 0.3s ease;
+  }
+
+  .voice-tab:first-child { border-right: none; }
+
+  .voice-tab.active {
+    background: var(--ink-black);
+    color: var(--pure-white);
+    border-color: var(--ink-black);
+  }
+
+  .voice-panel {
+    display: none;
+    padding: 32px 24px;
+    background: var(--pure-white);
+    border: 1px solid var(--warm-sand);
+    border-top: none;
+    text-align: center;
+  }
+
+  .voice-panel.active { display: block; }
+
+  .record-btn {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 2px solid var(--petal-rose);
+    background: var(--pure-white);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-bottom: 16px;
+  }
+
+  .record-btn:hover {
+    background: var(--ivory-blush);
+    transform: scale(1.05);
+  }
+
+  .record-btn.recording {
+    background: var(--petal-rose);
+    border-color: var(--petal-rose);
+    animation: pulse 1.5s ease infinite;
+  }
+
+  .record-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--petal-rose);
+    transition: fill 0.3s ease;
+  }
+
+  .record-btn.recording svg {
+    fill: var(--pure-white);
+  }
+
+  .record-status {
+    font-size: 13px;
+    color: var(--slate-taupe);
+    margin-bottom: 4px;
+  }
+
+  .record-timer {
+    font-family: 'Jost', sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--ink-black);
+    display: none;
+  }
+
+  .record-timer.active { display: block; }
+
+  .audio-playback {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .audio-playback.has-recording { display: block; }
+
+  .audio-playback audio {
+    width: 100%;
+    height: 40px;
+  }
+
+  .re-record-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--petal-rose);
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    padding: 4px 8px;
+  }
+
+  .re-record-btn:hover { text-decoration: underline; }
+
+  .voice-prompt {
+    font-size: 13px;
+    color: var(--slate-taupe);
+    line-height: 1.6;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--ivory-blush);
+    text-align: left;
+  }
+
+  .voice-prompt strong {
+    font-weight: 400;
+    color: var(--ink-black);
+  }
+
+  /* Submit */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--pure-white);
+    background: var(--ink-black);
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    margin-top: 16px;
+  }
+
+  .submit-btn:hover {
+    background: var(--slate-taupe);
+  }
+
+  .submit-btn:disabled {
+    background: var(--warm-sand);
+    cursor: not-allowed;
+  }
+
+  .form-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--slate-taupe);
+    margin-top: 24px;
+    line-height: 1.6;
+  }
+
+  /* Success state */
+  .success-message {
+    display: none;
+    text-align: center;
+    padding: 60px 24px;
+  }
+
+  .success-message.show { display: block; }
+
+  .success-message h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+
+  .success-message p {
+    font-size: 15px;
+    color: var(--slate-taupe);
+    line-height: 1.8;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 48px 24px;
+    text-align: center;
+    background: var(--ink-black);
+    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  footer a {
+    color: var(--petal-rose);
+    text-decoration: none;
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(216,167,177,0.4); }
+    50% { box-shadow: 0 0 0 16px rgba(216,167,177,0); }
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .details-grid { grid-template-columns: 1fr; }
+    .comp-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .section { padding: 72px 20px; }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="logo">MEDGLO</div>
-            <div class="tagline">Aesthetic Medicine & Wellness</div>
-        </header>
 
-        <div class="hero">
-            <h1 class="position-title">Patient Coordinator</h1>
-            <div class="position-meta">
-                <span class="meta-item"><strong>Location:</strong> Remote (Philippines)</span>
-                <span class="meta-item"><strong>Hours:</strong> US Pacific Time</span>
-                <span class="meta-item"><strong>Type:</strong> Full-Time, Long-Term</span>
-            </div>
-            <p class="intro-text">
-                We're a physician-led aesthetic clinic in Orange County, California, and we're looking for someone special to join our team—not just fill a role. <strong>This is a long-term position</strong> for someone who wants stability, autonomy, and the chance to truly own their work.
-            </p>
-        </div>
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-badge">We're Hiring</div>
+  <div class="hero-logo">MEDGLO</div>
+  <div class="hero-tagline">Aesthetic Medicine & Wellness</div>
+  <div class="hero-divider"></div>
+  <h1 class="hero-headline">We're looking for someone whose smile you can hear through the phone.</h1>
+  <p class="hero-sub">Join our physician-led aesthetic clinic in Orange County, California as a remote Patient Coordinator. Full-time, long-term, and built for someone who wants to truly own their work.</p>
+  <a href="#apply" class="hero-cta">Apply Now</a>
+</section>
 
-        <div class="section">
-            <h2 class="section-title">The Role</h2>
-            <p>
-                You'll be the first voice our patients hear. When a woman fills out a form because she's finally ready to do something for herself—maybe Botox, maybe a facial treatment—you're the person who calls her back, makes her feel comfortable, and helps her book an appointment.
-            </p>
-            <p>
-                This isn't a script-reading call center job. We need someone who can connect with people, put them at ease, and represent our clinic with warmth and professionalism. Someone whose smile you can hear through the phone.
-            </p>
-            <div class="highlight-box">
-                <p>"We want someone who gets it—who understands why a woman might be nervous about trying Botox for the first time, and knows how to make her feel safe and excited instead."</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">What You'll Do</h2>
-            <ul>
-                <li>Call and text leads quickly when they come in (speed matters in our business)</li>
-                <li>Follow up persistently but warmly with people who don't respond right away</li>
-                <li>Reach out to old leads and past inquiries to re-engage them</li>
-                <li>Make outbound calls to potential clients when time allows</li>
-                <li>Book appointments and confirm them so patients actually show up</li>
-                <li>Answer basic questions about our services (we'll train you, but natural curiosity helps)</li>
-                <li>Manage your own workflow—we're not going to micromanage you</li>
-                <li>Flag issues proactively when something isn't working</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Who You Are</h2>
-            <div class="two-column">
-                <div>
-                    <div class="column-title">You Have</div>
-                    <ul>
-                        <li>Excellent spoken English with a clear, warm phone presence</li>
-                        <li>Experience in customer service, sales, or patient coordination</li>
-                        <li>Reliable internet and a quiet place to make calls</li>
-                        <li>Availability during US Pacific business hours (night shift in PH)</li>
-                    </ul>
-                </div>
-                <div>
-                    <div class="column-title">You Are</div>
-                    <ul>
-                        <li>Self-motivated—you don't need someone watching over you</li>
-                        <li>Naturally warm and positive (not forced, genuinely friendly)</li>
-                        <li>Comfortable speaking up when something needs attention</li>
-                        <li>Interested in aesthetics, beauty, or wellness (or willing to learn)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">Compensation</h2>
-            <p>We believe in paying well for great work. Your earnings are tied directly to results—the better you perform, the more you make.</p>
-
-            <div class="comp-table">
-                <div class="comp-row comp-header">
-                    <span>Component</span>
-                    <span>Details</span>
-                    <span>Amount</span>
-                </div>
-                <div class="comp-row">
-                    <span>Base Pay</span>
-                    <span>$7/hour × 160 hours</span>
-                    <span>$1,120</span>
-                </div>
-                <div class="comp-row">
-                    <span>Booking Bonus</span>
-                    <span>$5 per appointment booked</span>
-                    <span>varies</span>
-                </div>
-                <div class="comp-row">
-                    <span>Show Bonus</span>
-                    <span>$10 per patient who shows up</span>
-                    <span>varies</span>
-                </div>
-                <div class="comp-row comp-total">
-                    <span>Example Month</span>
-                    <span>117 bookings, 88 shows</span>
-                    <span>$2,585</span>
-                </div>
-            </div>
-
-            <p style="margin-top: 20px; font-size: 0.9rem;">
-                <em>Your base pay is guaranteed. Bonuses reward you for doing what matters most—getting patients booked and through the door.</em>
-            </p>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">What We Offer</h2>
-            <ul>
-                <li><strong>Long-term stability</strong>—we're building a team, not hiring for a project</li>
-                <li><strong>Autonomy</strong>—we'll give you the tools and training, then trust you to do your job</li>
-                <li><strong>Clear expectations</strong>—you'll always know what success looks like</li>
-                <li><strong>Room to grow</strong>—as the clinic grows, so can your role</li>
-                <li><strong>A good boss</strong>—direct communication, no drama, respect for your time</li>
-            </ul>
-            <p style="margin-top: 20px;">
-                <em>Note: You don't need to be technical. We handle all the systems and phone setup. You just need to be great with people.</em>
-            </p>
-        </div>
-
-        <div class="section contact-section">
-            <h2 class="section-title">Interested?</h2>
-            <p>
-                Send a short voice message or note introducing yourself. Tell us a bit about your experience and why this role caught your eye.
-            </p>
-            <div class="contact-methods">
-                <a href="https://wa.me/16267107236" class="contact-link">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    WhatsApp: +1 626-710-7236
-                </a>
-                <a href="mailto:JoshuaDaveMiller@gmail.com?subject=MedGlo Patient Coordinator Application" class="contact-link">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    JoshuaDaveMiller@gmail.com
-                </a>
-            </div>
-        </div>
-
-        <footer class="footer">
-            <p>MedGlo Aesthetic Medicine & Wellness · Mission Viejo, California</p>
-            <p><a href="https://med-glo.com" target="_blank">med-glo.com</a></p>
-        </footer>
+<!-- ==================== CLINIC VIDEO ==================== -->
+<section class="video-section">
+  <div class="video-wrapper">
+    <video autoplay muted loop playsinline>
+      <source src="https://videos.growth99.com/wp-content/uploads/2024/04/medglo-space-short-1.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay">
+      <p class="video-overlay-text">A calm, physician-led space where patients feel safe — and so will you.</p>
     </div>
+  </div>
+  <div class="video-caption">
+    <p>Our Clinic · Mission Viejo, California</p>
+  </div>
+</section>
+
+<!-- ==================== ABOUT CLINIC ==================== -->
+<section class="section about-clinic">
+  <div class="section-inner">
+    <div class="section-label">The Clinic</div>
+    <h2 class="section-title">Real Medicine. Real Results.</h2>
+    <div class="section-divider"></div>
+
+    <div class="about-grid">
+      <div class="about-image-container">
+        <img src="https://med-glo.com/wp-content/uploads/2024/03/home-about-vhealthmd-683x1024.webp" alt="Dr. Violeta Recalde, MD — MedGlo Aesthetic Medicine & Wellness" class="about-image">
+      </div>
+      <div class="about-text">
+        <h3>Dr. Violeta Recalde, MD</h3>
+        <div class="credential">Hospital-Based Physician · Aesthetic Medicine</div>
+        <p>MedGlo is a boutique aesthetic medicine practice in Mission Viejo, California. We're not a chain spa or a trend-chasing clinic. Every treatment is performed by Dr. Violeta herself — a hospital-based physician who brings real medical expertise to aesthetic care.</p>
+        <p>Our patients are mostly women aged 40–60 who are nervous about trying treatments for the first time. They choose us because we're calm, honest, and never pushy. We call it "Anti-Med-Spa Energy" — reassurance over persuasion, every time.</p>
+        <div class="testimonial-strip">
+          <blockquote>"So professional, clean, and calm — this is my new go-to. She really takes the time to explain things to you."</blockquote>
+          <cite>— MedGlo Patient</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== THE ROLE ==================== -->
+<section class="section role-section">
+  <div class="section-inner">
+    <div class="section-label">The Role</div>
+    <h2 class="section-title">Patient Coordinator</h2>
+    <div class="section-divider"></div>
+
+    <div class="role-content">
+      <p>You'll be the first voice our patients hear. When a woman fills out a form because she's finally ready to do something for herself — maybe Botox, maybe a facial treatment — you're the person who calls her back, makes her feel comfortable, and helps her book an appointment.</p>
+      <p>This isn't a script-reading call centre job. We need someone who can genuinely connect with people and represent our clinic with warmth and professionalism.</p>
+
+      <div class="role-quote">
+        "We want someone who gets it — who understands why a woman might be nervous about trying Botox for the first time, and knows how to make her feel safe and excited instead."
+      </div>
+
+      <p>This is a remote, full-time, long-term position. You'll work US Pacific business hours and have real autonomy over your day. We handle all tech and phone setup — you just need to be great with people.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== DETAILS ==================== -->
+<section class="section details-section">
+  <div class="section-inner">
+    <div class="section-label">The Details</div>
+    <h2 class="section-title">What You'll Do & Who You Are</h2>
+    <div class="section-divider"></div>
+
+    <div class="details-grid">
+      <div class="detail-card">
+        <h4>Your Day-to-Day</h4>
+        <ul>
+          <li>Call and text leads quickly when they come in — speed matters</li>
+          <li>Follow up persistently but warmly with people who don't respond right away</li>
+          <li>Re-engage old leads and past inquiries</li>
+          <li>Book appointments and confirm them so patients actually show up</li>
+          <li>Answer basic questions about our services</li>
+          <li>Manage your own workflow — we don't micromanage</li>
+          <li>Flag issues proactively when something isn't working</li>
+        </ul>
+      </div>
+
+      <div class="detail-card">
+        <h4>What You Bring</h4>
+        <ul>
+          <li>Excellent spoken English — clear, natural, and warm</li>
+          <li>Experience in customer service, sales, or appointment setting</li>
+          <li>Reliable internet and a quiet space for calls</li>
+          <li>Availability during US Pacific business hours</li>
+          <li>Self-motivated — you don't need someone watching over you</li>
+          <li>Comfortable speaking up when something needs attention</li>
+          <li>Interest in aesthetics or wellness is a plus, not a requirement</li>
+        </ul>
+      </div>
+
+      <div class="detail-card">
+        <h4>What We Offer</h4>
+        <ul>
+          <li>Long-term stability — we're building a team, not hiring for a project</li>
+          <li>Real autonomy with tools, training, and trust</li>
+          <li>Clear expectations — you'll always know what success looks like</li>
+          <li>Room to grow as the clinic grows</li>
+          <li>Direct communication, no drama, respect for your time</li>
+          <li>All systems and phone setup handled for you</li>
+        </ul>
+      </div>
+
+      <div class="detail-card">
+        <h4>You're Perfect If...</h4>
+        <ul>
+          <li>People tell you you're easy to talk to</li>
+          <li>You've worked night shifts before and thrive in them</li>
+          <li>You take ownership — if something's broken, you say so</li>
+          <li>You're genuinely warm, not performatively friendly</li>
+          <li>You'd rather have one great job than chase gigs</li>
+          <li>You can picture yourself reassuring a nervous patient</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== COMPENSATION ==================== -->
+<section class="section comp-section">
+  <div class="section-inner">
+    <div class="section-label">Compensation</div>
+    <h2 class="section-title">Built to Reward What Matters</h2>
+    <div class="section-divider"></div>
+
+    <div class="comp-grid">
+      <div class="comp-item">
+        <div class="comp-amount">$1,120</div>
+        <div class="comp-label">Base Pay / Month</div>
+        <div class="comp-desc">$7/hour × 160 hours. Guaranteed every month regardless of performance.</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-amount">+$5</div>
+        <div class="comp-label">Per Booking</div>
+        <div class="comp-desc">For every appointment you successfully schedule with a patient.</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-amount">+$10</div>
+        <div class="comp-label">Per Show</div>
+        <div class="comp-desc">For every patient who actually walks through the door.</div>
+      </div>
+    </div>
+
+    <div class="comp-example">
+      <div class="comp-example-label">Example Month — 117 Bookings, 88 Shows</div>
+      <div class="comp-example-amount">$2,585</div>
+      <div class="comp-example-detail">The more patients you help, the more you earn.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== APPLICATION ==================== -->
+<section class="section apply-section" id="apply">
+  <div class="section-inner">
+    <div class="section-label">Apply</div>
+    <h2 class="section-title">We'd Love to Hear From You</h2>
+    <div class="section-divider"></div>
+
+    <div class="apply-form-container">
+      <form id="applicationForm">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name <span class="required">*</span></label>
+            <input type="text" name="firstName" required placeholder="Your first name">
+          </div>
+          <div class="form-group">
+            <label>Last Name <span class="required">*</span></label>
+            <input type="text" name="lastName" required placeholder="Your last name">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email <span class="required">*</span></label>
+            <input type="email" name="email" required placeholder="you@email.com">
+          </div>
+          <div class="form-group">
+            <label>WhatsApp Number <span class="required">*</span></label>
+            <input type="tel" name="phone" required placeholder="+27 or country code">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Location</label>
+          <input type="text" name="location" placeholder="City, Country">
+        </div>
+
+        <!-- Resume Upload -->
+        <div class="form-group">
+          <label>Your CV / Resume <span class="required">*</span></label>
+          <div class="upload-zone" id="resumeZone">
+            <input type="file" id="resumeInput" accept=".pdf,.doc,.docx" required>
+            <div class="upload-icon">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <div class="upload-title">Drop your CV here or click to browse</div>
+            <div class="upload-hint">PDF, DOC, or DOCX — Max 10MB</div>
+            <div class="upload-filename" id="resumeFilename"></div>
+          </div>
+        </div>
+
+        <!-- Voice Recording -->
+        <div class="form-group">
+          <label>Voice Recording <span class="required">*</span> — This is the most important part</label>
+          <div class="voice-section">
+            <div class="voice-option-tabs">
+              <div class="voice-tab active" data-panel="record">Record Now</div>
+              <div class="voice-tab" data-panel="upload">Upload File</div>
+            </div>
+
+            <!-- Record Panel -->
+            <div class="voice-panel active" id="panel-record">
+              <button type="button" class="record-btn" id="recordBtn">
+                <svg viewBox="0 0 24 24"><path d="M12 1a4 4 0 0 0-4 4v7a4 4 0 0 0 8 0V5a4 4 0 0 0-4-4z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="19" x2="12" y2="23" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </button>
+              <div class="record-status" id="recordStatus">Tap to start recording</div>
+              <div class="record-timer" id="recordTimer">0:00</div>
+              <div class="audio-playback" id="audioPlayback">
+                <audio id="audioPlayer" controls></audio>
+                <button type="button" class="re-record-btn" id="reRecordBtn">Re-record</button>
+              </div>
+              <div class="voice-prompt">
+                <strong>What to say (60–90 seconds):</strong><br>
+                1. Your name and where you're based<br>
+                2. A bit about your relevant experience<br>
+                3. Why this role caught your eye<br><br>
+                Just be yourself — we want to hear how you naturally sound on a call.
+              </div>
+            </div>
+
+            <!-- Upload Panel -->
+            <div class="voice-panel" id="panel-upload">
+              <div class="upload-zone" id="voiceZone">
+                <input type="file" id="voiceInput" accept="audio/*,.mp3,.wav,.m4a,.ogg,.webm">
+                <div class="upload-icon">
+                  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                </div>
+                <div class="upload-title">Drop your voice recording here</div>
+                <div class="upload-hint">MP3, WAV, M4A — Max 25MB</div>
+                <div class="upload-filename" id="voiceFilename"></div>
+              </div>
+              <div class="voice-prompt">
+                <strong>What to say (60–90 seconds):</strong><br>
+                1. Your name and where you're based<br>
+                2. A bit about your relevant experience<br>
+                3. Why this role caught your eye<br><br>
+                Just be yourself — we want to hear how you naturally sound on a call.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why this role -->
+        <div class="form-group">
+          <label>Why does this role appeal to you? <span class="required">*</span></label>
+          <textarea name="whyThisRole" required placeholder="A few sentences is perfect. We're curious what caught your eye."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Submit Application</button>
+
+        <p class="form-note">
+          Your application goes directly to the hiring team.<br>
+          We review every submission personally and respond within 5 business days.
+        </p>
+      </form>
+
+      <!-- Success Message -->
+      <div class="success-message" id="successMessage">
+        <h3>Thank You</h3>
+        <p>We've received your application and will review it personally. If your experience and voice recording are a fit, we'll reach out via WhatsApp within 5 business days.</p>
+        <p style="margin-top: 24px; color: var(--petal-rose);">We appreciate you taking the time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  MedGlo Aesthetic Medicine & Wellness · Mission Viejo, California<br>
+  <a href="https://med-glo.com" target="_blank">med-glo.com</a>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+  // ============ CONFIGURATION ============
+  // Replace with your Google Apps Script Web App URL after setup
+  const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+
+  // ---- File Upload Handling ----
+  function setupUploadZone(zoneId, inputId, filenameId) {
+    const zone = document.getElementById(zoneId);
+    const input = document.getElementById(inputId);
+    const filename = document.getElementById(filenameId);
+
+    ['dragenter', 'dragover'].forEach(e => {
+      zone.addEventListener(e, (ev) => { ev.preventDefault(); zone.classList.add('dragover'); });
+    });
+    ['dragleave', 'drop'].forEach(e => {
+      zone.addEventListener(e, (ev) => { ev.preventDefault(); zone.classList.remove('dragover'); });
+    });
+    zone.addEventListener('drop', (ev) => {
+      const files = ev.dataTransfer.files;
+      if (files.length) { input.files = files; handleFile(input, zone, filename); }
+    });
+    input.addEventListener('change', () => handleFile(input, zone, filename));
+  }
+
+  function handleFile(input, zone, filename) {
+    if (input.files.length) {
+      zone.classList.add('has-file');
+      filename.textContent = input.files[0].name;
+    }
+  }
+
+  setupUploadZone('resumeZone', 'resumeInput', 'resumeFilename');
+  setupUploadZone('voiceZone', 'voiceInput', 'voiceFilename');
+
+  // ---- Voice Tab Switching ----
+  document.querySelectorAll('.voice-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.voice-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.voice-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    });
+  });
+
+  // ---- Voice Recording ----
+  let mediaRecorder = null;
+  let audioChunks = [];
+  let recordingBlob = null;
+  let timerInterval = null;
+  let seconds = 0;
+
+  const recordBtn = document.getElementById('recordBtn');
+  const recordStatus = document.getElementById('recordStatus');
+  const recordTimer = document.getElementById('recordTimer');
+  const audioPlayback = document.getElementById('audioPlayback');
+  const audioPlayer = document.getElementById('audioPlayer');
+  const reRecordBtn = document.getElementById('reRecordBtn');
+
+  recordBtn.addEventListener('click', async () => {
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+      mediaRecorder.stop();
+      recordBtn.classList.remove('recording');
+      recordStatus.textContent = 'Recording saved';
+      recordTimer.classList.remove('active');
+      clearInterval(timerInterval);
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
+
+      mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
+      mediaRecorder.onstop = () => {
+        recordingBlob = new Blob(audioChunks, { type: 'audio/webm' });
+        const url = URL.createObjectURL(recordingBlob);
+        audioPlayer.src = url;
+        audioPlayback.classList.add('has-recording');
+        stream.getTracks().forEach(t => t.stop());
+      };
+
+      mediaRecorder.start();
+      recordBtn.classList.add('recording');
+      recordStatus.textContent = 'Recording... tap to stop';
+      seconds = 0;
+      recordTimer.textContent = '0:00';
+      recordTimer.classList.add('active');
+      timerInterval = setInterval(() => {
+        seconds++;
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        recordTimer.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+      }, 1000);
+
+    } catch (err) {
+      recordStatus.textContent = 'Microphone access denied. Please allow access or upload a file instead.';
+    }
+  });
+
+  reRecordBtn.addEventListener('click', () => {
+    recordingBlob = null;
+    audioPlayback.classList.remove('has-recording');
+    audioPlayer.src = '';
+    recordStatus.textContent = 'Tap to start recording';
+    seconds = 0;
+  });
+
+  // ---- Form Submission ----
+  document.getElementById('applicationForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Check voice recording exists (either recorded or uploaded)
+    const voiceInput = document.getElementById('voiceInput');
+    const hasUploadedVoice = voiceInput.files.length > 0;
+    const hasRecordedVoice = recordingBlob !== null;
+
+    if (!hasUploadedVoice && !hasRecordedVoice) {
+      alert('Please record or upload a voice message — it\'s the most important part of your application!');
+      return;
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    try {
+      // Collect form data
+      const formData = {
+        action: 'submit',
+        firstName: document.querySelector('input[name="firstName"]').value,
+        lastName: document.querySelector('input[name="lastName"]').value,
+        email: document.querySelector('input[name="email"]').value,
+        phone: document.querySelector('input[name="phone"]').value,
+        location: document.querySelector('input[name="location"]').value,
+        whyThisRole: document.querySelector('textarea[name="whyThisRole"]').value,
+        resumeUrl: '',
+        voiceUrl: ''
+      };
+
+      // Convert resume to base64 if present
+      const resumeInput = document.getElementById('resumeInput');
+      if (resumeInput.files.length > 0) {
+        formData.resumeUrl = await fileToBase64(resumeInput.files[0]);
+      }
+
+      // Convert voice to base64
+      if (hasRecordedVoice) {
+        formData.voiceUrl = await blobToBase64(recordingBlob);
+      } else if (hasUploadedVoice) {
+        formData.voiceUrl = await fileToBase64(voiceInput.files[0]);
+      }
+
+      // Submit to Google Sheets
+      if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+      }
+
+      // Show success state
+      const form = document.getElementById('applicationForm');
+      const success = document.getElementById('successMessage');
+      form.style.display = 'none';
+      success.classList.add('show');
+      window.scrollTo({ top: document.getElementById('apply').offsetTop - 40, behavior: 'smooth' });
+
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('There was an error submitting your application. Please try again or contact us directly via WhatsApp.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Application';
+    }
+  });
+
+  // Helper functions for file conversion
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  function blobToBase64(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+</script>
+
 </body>
 </html>
