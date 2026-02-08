@@ -657,13 +657,30 @@
     }
   }
 
-  // Fetch helper that follows redirects (Google Apps Script requirement)
-  async function fetchWithJsonp(url) {
-    const response = await fetch(url, {
-      method: 'GET',
-      redirect: 'follow'
+  // Real JSONP to avoid CORS issues with Google Apps Script
+  function fetchWithJsonp(url) {
+    return new Promise((resolve, reject) => {
+      const callbackName = 'jsonpCallback_' + Date.now();
+      const script = document.createElement('script');
+
+      // Set up the global callback
+      window[callbackName] = function(data) {
+        delete window[callbackName];
+        document.head.removeChild(script);
+        resolve(data);
+      };
+
+      script.onerror = function() {
+        delete window[callbackName];
+        document.head.removeChild(script);
+        reject(new Error('JSONP request failed'));
+      };
+
+      // Add callback parameter to URL
+      const separator = url.includes('?') ? '&' : '?';
+      script.src = url + separator + 'callback=' + callbackName;
+      document.head.appendChild(script);
     });
-    return await response.json();
   }
 
   function getDemoData() {
@@ -749,15 +766,15 @@
             <div class="detail-section">
               <h4>Contact Information</h4>
               <p><strong>Email:</strong> <a href="mailto:${app.email}">${app.email}</a></p>
-              <p><strong>WhatsApp:</strong> <a href="https://wa.me/${app.phone.replace(/[^0-9]/g, '')}">${app.phone}</a></p>
+              <p><strong>WhatsApp:</strong> <a href="https://wa.me/${String(app.phone).replace(/[^0-9]/g, '')}">${app.phone}</a></p>
               <p><strong>Location:</strong> ${app.location || 'Not provided'}</p>
             </div>
             <div class="detail-section">
               <h4>Attachments</h4>
-              <p><a href="${app.resumeUrl}" target="_blank">View Resume/CV</a></p>
+              ${renderResumeLink(app)}
               <div class="voice-player">
                 <p><strong>Voice Recording:</strong></p>
-                ${app.voiceUrl ? `<audio controls src="${app.voiceUrl}"></audio>` : '<p style="color: var(--slate-taupe); font-size: 13px;">No voice recording available</p>'}
+                ${renderVoicePlayer(app)}
               </div>
             </div>
           </div>
@@ -864,6 +881,73 @@
     const btn = event.target;
     btn.textContent = 'Saved!';
     setTimeout(() => btn.textContent = 'Save Notes', 2000);
+  }
+
+  // ============ FILE HELPERS ============
+  // Handles both base64 data URIs (old submissions) and Google Drive links (new submissions)
+
+  function isDataUrl(url) {
+    return url && String(url).startsWith('data:');
+  }
+
+  function isDriveUrl(url) {
+    return url && String(url).includes('drive.google.com');
+  }
+
+  function renderResumeLink(app) {
+    var url = app.resumeUrl;
+    if (!url) return '<p style="color: var(--slate-taupe); font-size: 13px;">No resume uploaded</p>';
+
+    if (isDriveUrl(url)) {
+      return '<p><a href="' + url + '" target="_blank">View Resume/CV</a></p>';
+    }
+
+    if (isDataUrl(url)) {
+      var id = app.id;
+      return '<p><a href="#" onclick="downloadBase64File(\'' + id + '\', \'resume\'); return false;">Download Resume/CV</a></p>';
+    }
+
+    return '<p><a href="' + url + '" target="_blank">View Resume/CV</a></p>';
+  }
+
+  function renderVoicePlayer(app) {
+    var url = app.voiceUrl;
+    if (!url) return '<p style="color: var(--slate-taupe); font-size: 13px;">No voice recording available</p>';
+
+    if (isDriveUrl(url)) {
+      // Google Drive links: extract file ID and use preview URL for audio
+      var match = String(url).match(/\/d\/([^/]+)/);
+      if (match) {
+        var fileId = match[1];
+        var directUrl = 'https://drive.google.com/uc?export=download&id=' + fileId;
+        return '<audio controls src="' + directUrl + '"></audio>' +
+               '<p style="margin-top:4px;"><a href="' + url + '" target="_blank" style="font-size:12px;color:var(--petal-rose);">Open in Drive</a></p>';
+      }
+      return '<p><a href="' + url + '" target="_blank">Listen in Google Drive</a></p>';
+    }
+
+    if (isDataUrl(url)) {
+      // base64 data URIs work directly as audio src
+      return '<audio controls src="' + url + '"></audio>';
+    }
+
+    return '<audio controls src="' + url + '"></audio>';
+  }
+
+  function downloadBase64File(appId, type) {
+    var app = applications.find(function(a) { return a.id === appId; });
+    if (!app) return;
+
+    var dataUrl = type === 'resume' ? app.resumeUrl : app.voiceUrl;
+    if (!dataUrl || !isDataUrl(dataUrl)) return;
+
+    // Create a temporary link and trigger download
+    var a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = app.firstName + '_' + app.lastName + '_' + (type === 'resume' ? 'Resume' : 'Voice');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
   // ============ UTILITIES ============
