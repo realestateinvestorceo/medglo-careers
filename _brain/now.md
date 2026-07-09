@@ -206,6 +206,25 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   **rebalance** (pause the weakest sub-gate spend) rather than deferred — a hard-cap guard guarantees
   no run ever exceeds the ceiling (3c859a6); (c) reactivate only ever targets an ad whose ad-set is
   already ACTIVE, so it always delivers and never no-ops on a duplicate-named ad in a dead ad-set (7fabedd).
+- **✅ VALUE-BASED SCALING added 2026-07-08 (commits a840246/a1d9ec7) — answers Josh's "how do I
+  know when to raise budget / what should it be each week?"** The scaling bar is no longer a flat
+  $200. The agent computes what a booked patient is WORTH (attributed LTV $645/patient × 55% margin
+  = ~$355 margin, a floor) and scales ads that book up to a **value ceiling** = margin × 70% payback
+  − Andrea ≈ **$214/booked** (`scaleCeiling = max(goal gate, value ceiling)` — only ever adds
+  headroom). New `/agent` "Budget & scaling" panel shows LTV, the value ceiling, recommended
+  next-week budget, and weekly visits (~33/wk now vs the ~74/wk = $100k/mo capacity). Two new levers,
+  **both OFF by default** (Josh opts in at /agent): **capacity_visits_week** (freezes raises near a
+  visits/wk limit so it never buys appointments the schedule can't serve) and **weekly_ceiling_max**
+  (lets the agent RATCHET its own weekly ceiling ~15%/wk toward a hard max Josh sets — the "drive up
+  the road to $100k on its own"; every ceiling raise is logged + revertible, never past the max).
+  Key teaching Josh now gets: "ROAS>1 = scale" is wrong (need ~1.8x just to break even at 55% margin);
+  budget is an OUTPUT (fill the schedule at a profitable cost/booked), capped by value OR capacity;
+  and his "3 patients/day" was a FUNNEL problem (now fixed by the bot), not too little budget.
+- **NEEDS JOSH to enable auto-scaling (optional, when ready):** set **weekly_ceiling_max** (e.g.
+  $2,500–3,500 — the real outer limit) so the agent ratchets the weekly ceiling up on its own as the
+  numbers justify; and **capacity_visits_week** (Dr. Recalde's true weekly visit ceiling) so it holds
+  once the schedule fills. Until set: agent scales within the fixed $850 ceiling only, and the panel
+  just RECOMMENDS next week's number.
 - **BUILT + DEPLOYED 2026-07-08 (commit 4b08897).** All 5 build stages
   shipped: caps/settings + change-log with exact-prior-state + one-click Revert (`/agent` page,
   Andrea's viewer login sees it read-only) · Meta write layer (pause/activate/budget, verify-after-
