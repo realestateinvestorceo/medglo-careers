@@ -251,6 +251,39 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
 - **Note:** the creative-level ad-metrics pull (`/api/creatives`) is now feeding `creative_metrics`
   (table created during go-live; its cron will keep it fresh). It powers the agent's fatigue briefs.
 
+## STREAM G — Meta Ad Creations (creative-QA critic agent)   ← session "Medglo - Meta Ad Creations"
+- **🟢 FULLY LIVE 2026-07-09 at ops.med-glo.com/creative — built, deployed, end-to-end tested.**
+  The independent CRITIC between Andrea and the Meta Agent. Flow (all working): brief → Andrea
+  uploads at /creative (her existing viewer login now opens it; big form, files go browser→Supabase
+  Storage so 50MB videos work; videos get 4 frames auto-extracted so the critic can SEE them) →
+  critic (claude-opus-4-8 vision, `lib/critic.ts`) applies **hard gates** (playbook LAW / medical /
+  consent / brief-fidelity) then a **1–10 craft score** with concrete plain-English fixes →
+  **goal is 9/10 but Andrea can "Send to Josh" at ANY score** (Josh's call — goal, not gate) →
+  Josh approves/rejects on the page (who/when/version recorded) → export launch package OR agent
+  launch (below). Tables: creative_queue/versions/reviews, brief_reviews, creative_inspiration
+  (migration 012, Josh ran it); private `creative-assets` bucket.
+- **First live review (demo CQ-1, real Claude run):** 6.5/10 on a laser-image + anti-upsell copy —
+  caught the image/copy mismatch, the laser≠doctor-lean-in rule, and flagged the patient quote for
+  verification. The critic is strict and cites the account's own benchmarks. ~$0.10/review, ~25-55s.
+- **Brief pushback LIVE:** critic reviews every agent brief before Andrea produces (daily cron
+  `creative-critic.yml` 10:30am PT + button on /creative); flags go to Josh to arbitrate
+  (proceed / agree-kill). Tested on brief #20 (viral-reel boost): correctly cleared it "ok".
+- **Calibration loop LIVE:** launched creatives (ad name "CQ-<id> …") get predicted CTR/hook/hold
+  checked vs creative_metrics + cost/booked after 14d; "Is the critic any good?" panel on /creative.
+- **Scoped launch plumbing DEPLOYED but OFF:** when Josh flips **allow_new_ads=1** at /agent, the
+  daily agent run may create ads **ONLY from Josh-approved creative_queue rows** (image creatives;
+  learning $75/wk + kill-by end date; logged in the change log, Revert = pause). Until then Josh
+  launches manually from the export package. **DO NOT flip without Josh.**
+- **Inspiration board LIVE (real Meta Ad Library research 2026-07-09):** 9 entries incl.
+  **NAKED MD (Mission Viejo) running "every injection performed by a registered nurse — no
+  exceptions" since Jul 2** — a competitor fighting on our who-injects axis where an RN is their
+  ceiling; and a year-running LA doctor-credibility+free-consult formula. Refresh via Ad Library
+  links on the page or ask this session.
+- **Needs Josh:** (a) nothing to go live — it IS live; (b) decide when to flip allow_new_ads;
+  (c) brief #20 (viral-reel boost) still awaits his approve at /agent; (d) note: the demo CQ-1 row
+  can be rejected/ignored. ANTHROPIC_API_KEY is in Vercel (added 2026-07-09; treat as semi-exposed —
+  it passed through chat — rotate at console.anthropic.com if concerned).
+
 ---
 
 ## NEEDS JOSH (cross-cutting)
