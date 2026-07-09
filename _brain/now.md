@@ -129,10 +129,16 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   pay/charge→% calculator for Dr. Recalde (percentage model needs no unit counts — product cost scales
   with revenue). **LTV IS captured** — the engine sums ALL post-acquisition visits across every service,
   so a Botox ad gets credit for whatever those patients buy later (Josh's core hope: answered YES).
-- **INSTAGRAM organic pull BUILT (not scheduled) 2026-07-08:** migration 009 + `/api/instagram`
-  (discover+pull). BLOCKED on a Meta token with instagram_basic + instagram_manage_insights +
-  pages_read_engagement + pages_show_list (the ads token lacks these). Activation steps in
-  `MedGlo-marketing/NOTES.md` §2026-07-08 (later).
+- **✅ INSTAGRAM organic pull LIVE 2026-07-08.** `/api/instagram` pulls @medglo.oc (IG id
+  17841429678372109) post reach/saves/shares/engagement → `instagram_posts` table; daily cron
+  7:20am PT (`instagram-pull.yml`). Setup done end-to-end: added the "Manage messaging & content on
+  Instagram" use case + `instagram_basic`/`instagram_manage_insights` to the MedGlo Analytics app;
+  Josh generated a **never-expiring System User token** (medglo-analytics SU) → Vercel `IG_ACCESS_TOKEN`
+  (separate from the ads `META_ACCESS_TOKEN`, which was verified still working). NOTE: that token also
+  carries ads_management + full Page/IG/ad-account access → it's the future agent's key too (treat as
+  sensitive; revoke from the SU screen if leaked). Insight metrics use `views` (impressions/plays were
+  deprecated). **First finding: a June-22 reel ("be kind to all patients") hit 73k reach / 2,936 shares
+  — a viral organic post worth boosting as an ad.** Warm/human reels >> informational ones.
 - **META-AD AGENT (Josh: build SOON, NOT yet — approved to wait):** dashboard COLLECTS, agent DECIDES;
   scorecard budget-call + actions list = its auditable decision log. Data-source plan (full detail in
   NOTES.md): **class A = performance** (have meta_ads/leads/patients/attribution; ADD creative-level
