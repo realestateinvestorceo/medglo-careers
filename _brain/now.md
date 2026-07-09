@@ -155,8 +155,14 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   [queued — task chip], IG organic [LIVE], Google Business Profile); class B = trend/creative-intel (Meta Ad
   Library, Google Trends, own reviews/GHL, TikTok) for GENERATING creative, human-gated. Ahrefs = own-site SEO
   not trend detection; Apify private-FB-group scraping = AVOID (ToS/legal/noise), public content only.
-- **⏭️ QUEUED (task chip, Josh: "don't forget"):** creative-level Meta ad-metrics pull (hook/hold/CTR/thumbnail/
-  body copy → Supabase) — uses existing ads_read, no new perms. The Meta Agent's creative decisions depend on it.
+- **✅ CREATIVE-METRICS PULL LIVE 2026-07-08.** `/api/creatives` joins Marketing API /ads (copy, headline,
+  format, thumbnail, CTA) + /insights (hook/hold/CTR/video-retention/quality rankings/leads) per ad →
+  `creative_metrics` table (87 ads loaded); daily cron 7:10am PT. Uses existing ads_read META_ACCESS_TOKEN.
+  **All 3 Meta-Agent data streams now live: ad performance + IG organic + creative metrics.**
+  **Early creative findings:** doctor-wedge STATIC ads win CTR (Skip-the-Chains 3.1%, No-Pressure 2.9% —
+  playbook copy works); reels hook ~95% (autoplay) but HOLD poorly (3.6–13.8%; warm/human "We used our Pico"
+  held best 13.8%, informational reels <5%) → reels need a stronger middle/payoff. Caveats: quality_ranking
+  UNKNOWN until an ad clears Meta's impression threshold; dynamic-creative ads capture only the first body variation.
 - **✅ scorecard_goals table created (Josh ran the SQL 2026-07-08)** — goals now editable at
   /scorecard/goals; still all "draft" (setByJosh empty) until Josh sets real numbers.
 - **Needs Josh:** (1) confirm/adjust the draft goals + road stages at /scorecard/goals (esp. the
@@ -169,6 +175,28 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   med-spa/primary-care split counts the **"Medical Consultation" appointment type in CalystaPro** —
   front desk must book PC visits under that type or they count as med-spa. Google review count has
   no API. A custom warning banner can be set at /scorecard/goals (no redeploy) once the SQL is run.
+
+## STREAM F — Meta Agent (daily ad-optimization agent)   ← session "Medglo - Meta Agent" · NEW 2026-07-08
+- **What:** a daily agent that reads marketing.med-glo.com + /scorecard, makes Meta-ad changes
+  (budgets, on/off, concept tests) autonomously within hard caps, and catalogs EVERY change on a
+  dashboard change-log with exact prior state + one-click Revert via the Meta API. Optimizes on
+  cost per booked/showed + true profit — never CPL/raw ROAS; respects the 11-day booking lag.
+  Full decided design: STREAM E's "META-AD AGENT — GREENLIT" block (don't duplicate here).
+- **AUTHORIZATION (Josh, written, 2026-07-08):** the agent ACTS autonomously (no advisor phase) on
+  toggles/budgets of EXISTING ads — **valid only once Josh's hard $ caps are set and recorded in this
+  block.** Until the cap numbers are written here, the agent makes NO live changes. New patient-facing
+  creative is NEVER auto-launched: brief → Andrea → playbook QA → Josh reviews.
+- **CAPS (Josh to set — agent session asks up front):** weekly total ceiling (circuit breaker) ·
+  per-ad daily max · learning-phase cap + kill-by date · auto-kill threshold (~2-3wk/$150-200, 0 booked) ·
+  max ±20%/wk per ad · max changes/run · may-it-create-new-test-ads or toggle/budget-only at first ·
+  creative-brief turnaround time. Budget context ~$700/wk.
+- **Build order:** (1) caps+settings + change-log/revert table (exact prior state) → (2) Meta write
+  layer (pause/activate/budget, logged+revertible) → (3) daily decision engine extending
+  `app/lib/scorecard.ts` budget-call/actions → (4) learning loop (hypothesis→result→verdict after
+  11-day lag) → (5) creative-brief loop (e.g. boost the viral Jun-22 reel, 73k reach).
+- **Key:** medglo-analytics System User token (ads_management, never expires) — in Vercel as
+  IG_ACCESS_TOKEN today; agent gets its OWN env var. **Dependency:** creative-level ad-metrics pull
+  (queued task chip) gates the creative decisions — build budget/on-off logic first.
 
 ---
 
