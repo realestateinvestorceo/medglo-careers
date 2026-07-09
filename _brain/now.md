@@ -195,17 +195,19 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   block.** Until the cap numbers are written here, the agent makes NO live changes (enforced in code:
   dry-run until "caps confirmed" is ticked at /agent). New patient-facing creative is NEVER
   auto-launched: brief → Andrea → playbook QA → Josh reviews.
-- **CAPS: ⏳ AWAITING JOSH (asked 2026-07-08 in the Meta Agent session).** To set: weekly ceiling
-  (circuit breaker; suggest $850 ≈ scorecard's $830) · per-ad daily max (suggest $40) · auto-kill
-  (defaults: ≥17 days old + ≥$175/90d + 0 booked → pause) · learning-phase test budget (default
-  $75/wk; kill-by = the auto-kill date) · new-test-ads autonomously? (default NO — toggle/budget
-  only) · creative-brief turnaround. Once Josh answers → record numbers HERE + enter at /agent +
-  tick "caps confirmed" → agent goes live. All defaults editable at /agent anytime.
-- **TO GO LIVE (3 steps, ~5 min):** (1) paste `supabase/RUN_THIS_IN_SUPABASE.sql` in the Supabase
-  SQL editor (also creates the still-missing `creative_metrics` table — its daily cron has been
-  failing since it shipped); (2) add Vercel env `AGENT_META_TOKEN` = the medglo-analytics System
-  User token (same value as IG_ACCESS_TOKEN; the agent's own key — writes use ONLY this); (3) set
-  caps at marketing.med-glo.com/agent + tick confirm. Until then: daily dry-runs log what it WOULD do.
+- **✅ CAPS SET BY JOSH (written, 2026-07-08, in the Meta Agent session) — the authorization
+  above is now VALID once the numbers are live in agent_settings:**
+  **weekly ceiling $850** (circuit breaker halts ALL changes) · **per-ad daily max $60** ·
+  auto-kill defaults (**≥17 days old + ≥$175/90d + 0 booked → pause**) · learning-phase test
+  budget **$75/wk** (kill-by = auto-kill date) · max ±20%/wk per ad · max 3 changes/run ·
+  **toggle/budget of EXISTING ads only — the agent may NOT create new ads** (allow_new_ads=0;
+  new creative stays brief→Andrea→Josh). All editable at /agent later.
+- **TO GO LIVE (2 steps left, ~5 min — Josh):** (1) paste `supabase/RUN_THIS_IN_SUPABASE.sql` in
+  the Supabase SQL editor (also creates the still-missing `creative_metrics` table — its daily
+  cron has been failing since it shipped); (2) add Vercel env `AGENT_META_TOKEN` = the
+  medglo-analytics System User token (same value as IG_ACCESS_TOKEN; the agent's own key — writes
+  use ONLY this). Then any session (or Josh at /agent) seeds the caps above + ticks "caps
+  confirmed" and the agent is live. Until then: daily dry-runs log what it WOULD do.
 - **Note:** the creative-level ad-metrics pull (`/api/creatives` + cron) was already built by the
   scorecard session — only its table SQL is missing (step 1 covers it). It feeds the agent's
   fatigue briefs; the budget/on-off logic works without it.
