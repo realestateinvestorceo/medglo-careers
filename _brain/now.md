@@ -177,7 +177,22 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   no API. A custom warning banner can be set at /scorecard/goals (no redeploy) once the SQL is run.
 
 ## STREAM F — Meta Agent (daily ad-optimization agent)   ← session "Medglo - Meta Agent"
-- **✅ BUILT + DEPLOYED 2026-07-08 (commit 4b08897) — LIVE IN DRY-RUN MODE.** All 5 build stages
+- **🟢 FULLY LIVE 2026-07-08 — caps confirmed, first live run executed & verified on Meta.** Josh
+  pasted the SQL, seeded the caps (agent_settings, caps_confirmed=1), and approved the first run.
+  **First LIVE run (run #17, 3 changes, all applied+verified):** (1) PAUSED "Girl Math PICO Summer -
+  IG Reel" (0 booked on $189, matured); (2) RAISED "Tattoo_Removal_Laser_Spanish_V1" campaign budget
+  $20→$24/day (cheapest proven booker, scorecard RAISE); (3) REACTIVATED "$1,680 Mistake — Refresh #1"
+  (12.4x, $49/booked winner) — budget-neutral, it lives in an already-active ad-set so it just
+  competes for existing budget. Net +$28/wk → ~$700/wk, under the $850 ceiling. Every change is in
+  the /agent log with exact prior state + one-click Revert. Daily cron `agent-run.yml` 10am PT now
+  runs it autonomously within the caps.
+- **KEY DESIGN FIXES made during go-live (all committed):** (a) write token falls back to
+  IG_ACCESS_TOKEN — no new Vercel env needed (55f0ae5); (b) **ceiling is holder-level**: a reactivate
+  into a live ad-set is correctly budget-neutral, and a winner blocked by the ceiling is funded by a
+  **rebalance** (pause the weakest sub-gate spend) rather than deferred — a hard-cap guard guarantees
+  no run ever exceeds the ceiling (3c859a6); (c) reactivate only ever targets an ad whose ad-set is
+  already ACTIVE, so it always delivers and never no-ops on a duplicate-named ad in a dead ad-set (7fabedd).
+- **BUILT + DEPLOYED 2026-07-08 (commit 4b08897).** All 5 build stages
   shipped: caps/settings + change-log with exact-prior-state + one-click Revert (`/agent` page,
   Andrea's viewer login sees it read-only) · Meta write layer (pause/activate/budget, verify-after-
   write, revert = re-apply prior state) · daily decision engine extending the scorecard LADDER
@@ -186,34 +201,22 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   circuit breaker, cost/booked auto-halt, kill switch) · learning loop (expected→actual→verdict
   after 14d) · creative-brief loop (viral-IG + fatigued-winner briefs → Andrea, Josh approves at
   /agent; NEVER auto-launched). Cron: `agent-run.yml` daily 10am PT. Raw detail: `MedGlo-marketing/NOTES.md`.
-- **FIRST RUN (dry, live data, 2026-07-08):** scorecard says RAISE ($139/booked, suggest $830/wk);
-  agent would (1) auto-kill "Girl Math PICO Summer - IG Reel" (running, ≥$175/90d, 0 booked),
-  (2) raise budget on "Tattoo_Removal_Laser_Spanish_V1" (cheapest proven booker), (3) reactivate
-  "$1,680 Mistake — Refresh #1" (proven winner, currently off). NO changes were made.
 - **AUTHORIZATION (Josh, written, 2026-07-08):** the agent ACTS autonomously (no advisor phase) on
-  toggles/budgets of EXISTING ads — **valid only once Josh's hard $ caps are set and recorded in this
-  block.** Until the cap numbers are written here, the agent makes NO live changes (enforced in code:
-  dry-run until "caps confirmed" is ticked at /agent). New patient-facing creative is NEVER
-  auto-launched: brief → Andrea → playbook QA → Josh reviews.
-- **✅ CAPS SET BY JOSH (written, 2026-07-08, in the Meta Agent session) — the authorization
-  above is now VALID once the numbers are live in agent_settings:**
+  toggles/budgets of EXISTING ads — valid because the caps are confirmed (below). New patient-facing
+  creative is NEVER auto-launched: brief → Andrea → playbook QA → Josh reviews.
+- **✅ CAPS (Josh, 2026-07-08 — live in agent_settings, caps_confirmed=1):**
   **weekly ceiling $850** (circuit breaker halts ALL changes) · **per-ad daily max $60** ·
   auto-kill defaults (**≥17 days old + ≥$175/90d + 0 booked → pause**) · learning-phase test
   budget **$75/wk** (kill-by = auto-kill date) · max ±20%/wk per ad · max 3 changes/run ·
   **toggle/budget of EXISTING ads only — the agent may NOT create new ads** (allow_new_ads=0;
-  new creative stays brief→Andrea→Josh). All editable at /agent later.
-- **TO GO LIVE (1 step left, ~2 min — Josh): paste `supabase/RUN_THIS_IN_SUPABASE.sql` in the
-  Supabase SQL editor** (creates the agent tables AND the still-missing `creative_metrics` table
-  whose daily cron has been failing since it shipped). The Meta write key is DONE — the agent
-  falls back to the never-expiring `IG_ACCESS_TOKEN` already in Vercel (commit 55f0ae5), so no
-  new env var is needed. `AGENT_META_TOKEN` is now only an OPTIONAL override if Josh ever wants
-  the agent's write key revocable independently of the IG pull. After the SQL: any session (or
-  Josh at /agent) seeds the caps above + ticks "caps confirmed" → live. Until then: daily
-  dry-runs log what it WOULD do (production dry run confirmed: only remaining blockers are the
-  table + the caps rows, both fixed by the paste).
-- **Note:** the creative-level ad-metrics pull (`/api/creatives` + cron) was already built by the
-  scorecard session — only its table SQL is missing (step 1 covers it). It feeds the agent's
-  fatigue briefs; the budget/on-off logic works without it.
+  new creative stays brief→Andrea→Josh). All editable at marketing.med-glo.com/agent anytime;
+  emergency stop (kill switch) on the same page.
+- **Watch this week:** (1) confirm "$1,680 Mistake" delivers (was IN_PROCESS/review right after
+  enabling — should go ACTIVE); (2) the 1 creative brief the agent drafted (boost the viral Jun-22
+  reel, 73k reach) is waiting for Josh's approval at /agent → then Andrea; (3) the daily 10am cron's
+  runs — the learning loop fills in each change's actual outcome ~14 days later.
+- **Note:** the creative-level ad-metrics pull (`/api/creatives`) is now feeding `creative_metrics`
+  (table created during go-live; its cron will keep it fresh). It powers the agent's fatigue briefs.
 
 ---
 
