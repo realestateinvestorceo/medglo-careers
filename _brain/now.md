@@ -139,14 +139,24 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   sensitive; revoke from the SU screen if leaked). Insight metrics use `views` (impressions/plays were
   deprecated). **First finding: a June-22 reel ("be kind to all patients") hit 73k reach / 2,936 shares
   — a viral organic post worth boosting as an ad.** Warm/human reels >> informational ones.
-- **META-AD AGENT (Josh: build SOON, NOT yet — approved to wait):** dashboard COLLECTS, agent DECIDES;
-  scorecard budget-call + actions list = its auditable decision log. Data-source plan (full detail in
-  NOTES.md): **class A = performance** (have meta_ads/leads/patients/attribution; ADD creative-level
-  ad metrics [hook/hold/CTR — highest-value], IG organic, Google Business Profile calls/reviews) drives
-  math decisions; **class B = trend/creative-intel** (Meta Ad Library for competitor winners, Google
-  Trends for OC buzz, own reviews/GHL questions, TikTok) for GENERATING creative, human-gated. **Ahrefs =
-  own-site SEO, NOT trend detection. Apify scraping private FB groups = advise AGAINST (ToS/legal/noise);
-  public content only.** Build class-A first, prove decisions, then add trend inputs.
+- **META-AD AGENT — GREENLIT 2026-07-08, Josh spinning up its own session ("Medglo - Meta Agent") via Chief.**
+  Full kickoff prompt handed to Chief (Scorecard session wrote it). **DECIDED design (Josh's call):**
+  agent **ACTS autonomously** (adjusts budgets, toggles ads on/off, tests concepts) — NOT advisor-first —
+  and **catalogs every change to a dashboard change-log with EXACT prior-state + one-click Revert** (revert
+  via Meta API so Josh never digs through Meta; Andrea sees changes too). **Safeguards = the money protection
+  (revert does NOT refund spent $):** hard caps (weekly ceiling/circuit-breaker, per-ad daily max, ±20%/wk
+  change cap), anti-"$1k-on-a-dud" auto-kill (respect the 11-day booking lag — pause after ~2-3wk/$150-200
+  spent w/ 0 booked), learning-phase spend cap + kill-by date, global kill switch, no thrashing. Optimize on
+  **cost per booked/showed + true-profit/cross-sell, NEVER CPL or raw ROAS.** Key = the medglo-analytics SU
+  token (ads_management; give agent its own env var). Existing-ad toggle/budget = autonomous; NEW creative
+  goes through Andrea + `message-playbook.md`. Reuses the scorecard budget-call/actions engine as its brain.
+  **Needs Josh (agent session will ask):** hard $ caps, may-it-create-new-ads-or-only-toggle, creative-brief
+  turnaround. **Data-source plan (NOTES.md):** class A = performance (have; ADD creative-level ad metrics
+  [queued — task chip], IG organic [LIVE], Google Business Profile); class B = trend/creative-intel (Meta Ad
+  Library, Google Trends, own reviews/GHL, TikTok) for GENERATING creative, human-gated. Ahrefs = own-site SEO
+  not trend detection; Apify private-FB-group scraping = AVOID (ToS/legal/noise), public content only.
+- **⏭️ QUEUED (task chip, Josh: "don't forget"):** creative-level Meta ad-metrics pull (hook/hold/CTR/thumbnail/
+  body copy → Supabase) — uses existing ads_read, no new perms. The Meta Agent's creative decisions depend on it.
 - **✅ scorecard_goals table created (Josh ran the SQL 2026-07-08)** — goals now editable at
   /scorecard/goals; still all "draft" (setByJosh empty) until Josh sets real numbers.
 - **Needs Josh:** (1) confirm/adjust the draft goals + road stages at /scorecard/goals (esp. the
