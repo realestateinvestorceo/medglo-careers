@@ -202,12 +202,15 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   budget **$75/wk** (kill-by = auto-kill date) · max ±20%/wk per ad · max 3 changes/run ·
   **toggle/budget of EXISTING ads only — the agent may NOT create new ads** (allow_new_ads=0;
   new creative stays brief→Andrea→Josh). All editable at /agent later.
-- **TO GO LIVE (2 steps left, ~5 min — Josh):** (1) paste `supabase/RUN_THIS_IN_SUPABASE.sql` in
-  the Supabase SQL editor (also creates the still-missing `creative_metrics` table — its daily
-  cron has been failing since it shipped); (2) add Vercel env `AGENT_META_TOKEN` = the
-  medglo-analytics System User token (same value as IG_ACCESS_TOKEN; the agent's own key — writes
-  use ONLY this). Then any session (or Josh at /agent) seeds the caps above + ticks "caps
-  confirmed" and the agent is live. Until then: daily dry-runs log what it WOULD do.
+- **TO GO LIVE (1 step left, ~2 min — Josh): paste `supabase/RUN_THIS_IN_SUPABASE.sql` in the
+  Supabase SQL editor** (creates the agent tables AND the still-missing `creative_metrics` table
+  whose daily cron has been failing since it shipped). The Meta write key is DONE — the agent
+  falls back to the never-expiring `IG_ACCESS_TOKEN` already in Vercel (commit 55f0ae5), so no
+  new env var is needed. `AGENT_META_TOKEN` is now only an OPTIONAL override if Josh ever wants
+  the agent's write key revocable independently of the IG pull. After the SQL: any session (or
+  Josh at /agent) seeds the caps above + ticks "caps confirmed" → live. Until then: daily
+  dry-runs log what it WOULD do (production dry run confirmed: only remaining blockers are the
+  table + the caps rows, both fixed by the paste).
 - **Note:** the creative-level ad-metrics pull (`/api/creatives` + cron) was already built by the
   scorecard session — only its table SQL is missing (step 1 covers it). It feeds the agent's
   fatigue briefs; the budget/on-off logic works without it.
