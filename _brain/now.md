@@ -120,10 +120,15 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
 - **AD-TABLE FIX 2026-07-08:** Josh confused why an ad read CUT (top profit table) vs REVIEW (bottom
   funnel table). The bottom table now judges **cost per booked** (EFFICIENT/OK/EXPENSIVE/NO BOOKINGS,
   col "Booking efficiency") instead of raw ROAS — two clear lenses (booking efficiency vs profit
-  margin), not a contradiction. ⚠️ **Botox=$0-margin flag:** the profit table's assumption is
-  aggressive; it CUTs great Botox-acquisition ads (e.g. "$1,680 Mistake", $49/booked). The agent must
-  judge on **cost-per-booked + cross-sell**, not the Botox=$0 true-profit — treat that as a floor.
-  Set a real Botox margin in /settings once Josh knows per-unit cost.
+  margin), not a contradiction.
+- **✅ BOTOX-MARGIN FIXED 2026-07-08 (Josh: Botox ~$5/unit cost, ~$10 sale = 50%, NOT $0).** The engine
+  had Botox HARDCODED out of profit (info-only bucket); now it contributes at its product margin
+  (neurotoxin 50%, editable). Effect: "$1,680 Mistake" −$264 CUT → **+$3,323 SCALE** (now agrees with
+  funnel EFFICIENT + scorecard); La Doctora −$1,132 → +$500 (lifetime ~breakeven — recent funnel/actions
+  still flag it; kill stands on lead quality). `/settings` got example procedures per group + a
+  pay/charge→% calculator for Dr. Recalde (percentage model needs no unit counts — product cost scales
+  with revenue). **LTV IS captured** — the engine sums ALL post-acquisition visits across every service,
+  so a Botox ad gets credit for whatever those patients buy later (Josh's core hope: answered YES).
 - **INSTAGRAM organic pull BUILT (not scheduled) 2026-07-08:** migration 009 + `/api/instagram`
   (discover+pull). BLOCKED on a Meta token with instagram_basic + instagram_manage_insights +
   pages_read_engagement + pages_show_list (the ads token lacks these). Activation steps in
