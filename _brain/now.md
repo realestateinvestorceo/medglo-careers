@@ -176,27 +176,39 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   front desk must book PC visits under that type or they count as med-spa. Google review count has
   no API. A custom warning banner can be set at /scorecard/goals (no redeploy) once the SQL is run.
 
-## STREAM F — Meta Agent (daily ad-optimization agent)   ← session "Medglo - Meta Agent" · NEW 2026-07-08
-- **What:** a daily agent that reads marketing.med-glo.com + /scorecard, makes Meta-ad changes
-  (budgets, on/off, concept tests) autonomously within hard caps, and catalogs EVERY change on a
-  dashboard change-log with exact prior state + one-click Revert via the Meta API. Optimizes on
-  cost per booked/showed + true profit — never CPL/raw ROAS; respects the 11-day booking lag.
-  Full decided design: STREAM E's "META-AD AGENT — GREENLIT" block (don't duplicate here).
+## STREAM F — Meta Agent (daily ad-optimization agent)   ← session "Medglo - Meta Agent"
+- **✅ BUILT + DEPLOYED 2026-07-08 (commit 4b08897) — LIVE IN DRY-RUN MODE.** All 5 build stages
+  shipped: caps/settings + change-log with exact-prior-state + one-click Revert (`/agent` page,
+  Andrea's viewer login sees it read-only) · Meta write layer (pause/activate/budget, verify-after-
+  write, revert = re-apply prior state) · daily decision engine extending the scorecard LADDER
+  (auto-kill matured 0-booked ads, learning-phase caps + kill-by, ladder raise/cut on the cheapest/
+  most-expensive booker, reactivate proven winners; ±20%/wk, no-thrash, max-changes/run, weekly
+  circuit breaker, cost/booked auto-halt, kill switch) · learning loop (expected→actual→verdict
+  after 14d) · creative-brief loop (viral-IG + fatigued-winner briefs → Andrea, Josh approves at
+  /agent; NEVER auto-launched). Cron: `agent-run.yml` daily 10am PT. Raw detail: `MedGlo-marketing/NOTES.md`.
+- **FIRST RUN (dry, live data, 2026-07-08):** scorecard says RAISE ($139/booked, suggest $830/wk);
+  agent would (1) auto-kill "Girl Math PICO Summer - IG Reel" (running, ≥$175/90d, 0 booked),
+  (2) raise budget on "Tattoo_Removal_Laser_Spanish_V1" (cheapest proven booker), (3) reactivate
+  "$1,680 Mistake — Refresh #1" (proven winner, currently off). NO changes were made.
 - **AUTHORIZATION (Josh, written, 2026-07-08):** the agent ACTS autonomously (no advisor phase) on
   toggles/budgets of EXISTING ads — **valid only once Josh's hard $ caps are set and recorded in this
-  block.** Until the cap numbers are written here, the agent makes NO live changes. New patient-facing
-  creative is NEVER auto-launched: brief → Andrea → playbook QA → Josh reviews.
-- **CAPS (Josh to set — agent session asks up front):** weekly total ceiling (circuit breaker) ·
-  per-ad daily max · learning-phase cap + kill-by date · auto-kill threshold (~2-3wk/$150-200, 0 booked) ·
-  max ±20%/wk per ad · max changes/run · may-it-create-new-test-ads or toggle/budget-only at first ·
-  creative-brief turnaround time. Budget context ~$700/wk.
-- **Build order:** (1) caps+settings + change-log/revert table (exact prior state) → (2) Meta write
-  layer (pause/activate/budget, logged+revertible) → (3) daily decision engine extending
-  `app/lib/scorecard.ts` budget-call/actions → (4) learning loop (hypothesis→result→verdict after
-  11-day lag) → (5) creative-brief loop (e.g. boost the viral Jun-22 reel, 73k reach).
-- **Key:** medglo-analytics System User token (ads_management, never expires) — in Vercel as
-  IG_ACCESS_TOKEN today; agent gets its OWN env var. **Dependency:** creative-level ad-metrics pull
-  (queued task chip) gates the creative decisions — build budget/on-off logic first.
+  block.** Until the cap numbers are written here, the agent makes NO live changes (enforced in code:
+  dry-run until "caps confirmed" is ticked at /agent). New patient-facing creative is NEVER
+  auto-launched: brief → Andrea → playbook QA → Josh reviews.
+- **CAPS: ⏳ AWAITING JOSH (asked 2026-07-08 in the Meta Agent session).** To set: weekly ceiling
+  (circuit breaker; suggest $850 ≈ scorecard's $830) · per-ad daily max (suggest $40) · auto-kill
+  (defaults: ≥17 days old + ≥$175/90d + 0 booked → pause) · learning-phase test budget (default
+  $75/wk; kill-by = the auto-kill date) · new-test-ads autonomously? (default NO — toggle/budget
+  only) · creative-brief turnaround. Once Josh answers → record numbers HERE + enter at /agent +
+  tick "caps confirmed" → agent goes live. All defaults editable at /agent anytime.
+- **TO GO LIVE (3 steps, ~5 min):** (1) paste `supabase/RUN_THIS_IN_SUPABASE.sql` in the Supabase
+  SQL editor (also creates the still-missing `creative_metrics` table — its daily cron has been
+  failing since it shipped); (2) add Vercel env `AGENT_META_TOKEN` = the medglo-analytics System
+  User token (same value as IG_ACCESS_TOKEN; the agent's own key — writes use ONLY this); (3) set
+  caps at marketing.med-glo.com/agent + tick confirm. Until then: daily dry-runs log what it WOULD do.
+- **Note:** the creative-level ad-metrics pull (`/api/creatives` + cron) was already built by the
+  scorecard session — only its table SQL is missing (step 1 covers it). It feeds the agent's
+  fatigue briefs; the budget/on-off logic works without it.
 
 ---
 
