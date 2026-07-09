@@ -163,6 +163,10 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   playbook copy works); reels hook ~95% (autoplay) but HOLD poorly (3.6–13.8%; warm/human "We used our Pico"
   held best 13.8%, informational reels <5%) → reels need a stronger middle/payoff. Caveats: quality_ranking
   UNKNOWN until an ad clears Meta's impression threshold; dynamic-creative ads capture only the first body variation.
+- **✅ DOMAIN: canonical URL is now `ops.med-glo.com` (2026-07-08).** `marketing.med-glo.com` still resolves
+  (both point to the same Vercel "app" project). GitHub secret `VERCEL_APP_URL` updated → `https://ops.med-glo.com`,
+  so all 5 daily crons (meta/instagram/creatives/attribution/agent-run) now hit ops — verified live. Login is
+  per-host, so re-login on the new domain. Don't remove marketing.med-glo.com without confirming crons still fire.
 - **✅ OPS HUB restructure LIVE 2026-07-08 (Josh: make it operations.med-glo.com someday).** Shared **top nav**
   on every page: Overview · Marketing · Scorecard · Creative · Meta Agent · Bookkeeping · Settings.
   **`/` is now an OVERVIEW** (summary + links): "what the practice MADE last full month" P&L with **cost of
