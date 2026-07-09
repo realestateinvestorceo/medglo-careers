@@ -163,6 +163,16 @@ blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ad
   playbook copy works); reels hook ~95% (autoplay) but HOLD poorly (3.6–13.8%; warm/human "We used our Pico"
   held best 13.8%, informational reels <5%) → reels need a stronger middle/payoff. Caveats: quality_ranking
   UNKNOWN until an ad clears Meta's impression threshold; dynamic-creative ads capture only the first body variation.
+- **✅ OPS HUB restructure LIVE 2026-07-08 (Josh: make it operations.med-glo.com someday).** Shared **top nav**
+  on every page: Overview · Marketing · Scorecard · Creative · Meta Agent · Bookkeeping · Settings.
+  **`/` is now an OVERVIEW** (summary + links): "what the practice MADE last full month" P&L with **cost of
+  supplies (COGS) shown SEPARATELY from overhead** (Josh's ask) + a **breakeven ≈ $52k/mo** + this-week
+  snapshot. The money dashboard moved to **`/marketing`** (its P&L gained a "− Supplies" column;
+  Net = Revenue − Supplies − Ad − Overhead). **`/creative`** = the IG-posts + creative-metrics tables (the
+  visibility Josh wanted). **`/bookkeeping`** = overhead-on-file + honest $30k-estimate note (future books
+  tie-in). COGS = per-visit invoice × (1−margin) from /settings; Overview & Marketing revenue reconciled
+  (both count all paid-invoice rows). **June real P&L: $51k revenue − $18.7k supplies − $3k ad − $30k
+  overhead = −$684 (roughly breakeven — WHY we must grow).** `lib/pnl.ts` shares the math.
 - **✅ scorecard_goals table created (Josh ran the SQL 2026-07-08)** — goals now editable at
   /scorecard/goals; still all "draft" (setByJosh empty) until Josh sets real numbers.
 - **Needs Josh:** (1) confirm/adjust the draft goals + road stages at /scorecard/goals (esp. the
