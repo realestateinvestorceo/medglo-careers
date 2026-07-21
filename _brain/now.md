@@ -136,10 +136,41 @@ approvals before acting on gated work.
   aesthetics brand selling the wrong job. Copy rewrite waits on the VoC research; layout/pixel work can start now.
   Source is in-repo: `MedGlo-website/src/pages/primary-care` + `/es/atencion-primaria` (Astro).
 - **Josh's call 07-21: STOP and research first** — *"I'm absolutely at a loss of what women are looking for…
-  we need to discover what their pain is before we build a funnel. Maybe the brain already knows."*
-  **It does not.** All VoC + the whole focus-group panel are aesthetics; Nadia's dossier says so outright.
-  → VoC research running → `Competition/voice-of-customer-primary-care.md` (his wait-time hypothesis is the
-  headline thing to confirm or kill). **No PC funnel or spend until it lands.**
+  we need to discover what their pain is before we build a funnel."* The brain didn't know (all VoC + the whole
+  focus-group panel are aesthetics; Nadia's dossier says so outright). ✅ **RESEARCH DONE →
+  `Competition/voice-of-customer-primary-care.md`.**
+
+**🔀 PC CHANNEL REDIRECT (07-21) — ads are the wrong tool; it's a DIRECTORY + REPUTATION category. /todo #141**
+- **Wait-time hypothesis: half right.** Wait/access pain is real, worsening and quotable locally (family-med
+  new-patient wait 23.5d nat'l, CA timely-access 53.6% & falling; *"wait until May"*, *"almost two months and
+  couldn't get a call back"*, *"most of their doctors are not taking new patients"*). But the **initiating**
+  triggers are more often **insurance/network disruption (42% chose their last doctor on plan match)** and
+  **doctor retired/left (20%)** — wait time is the symptom you're judged on once they start looking.
+- **The #1 pain is being RUSHED, not the wait:** 68% feel rushed, 86% say no doctor sees their full picture,
+  category NPS **−52**. Local: *"the visit will literally take two seconds with a PA."*
+- **Paid social structurally doesn't fit:** 21 provider profiles compared before booking · **92% stay
+  in-network** (insurance = hard filter) · **personal connection is the #1 factor, 2× proximity** · 93% in
+  person. Explains the 931 views / 0 leads better than any budget theory.
+- **⚠ Paid search is thin too (Ahrefs, closed the research's own biggest gap 07-21):**
+  `primary care doctor mission viejo` **0/mo** · `doctor mission viejo` **0** · `primary care ladera ranch` **0**
+  · ES `medico de cabecera mission viejo` no data · `primary care doctor orange county` 70/mo. A full sweep of
+  `<x> doctor mission viejo` returns **only specialists** (eye 150, foot 100) — no primary-care term at all.
+  The big `primary care near me` terms (20–22k) are **US-aggregate** and Google answers them with the **Maps
+  pack / GBP**, not a landing page. → **Google Ads is NOT the fallback answer.**
+- **→ The real funnel: insurance find-a-doctor directories → word of mouth → ratings profiles → the page (which
+  CLOSES, never captures).** Priorities: GBP for the PC service line · verify listings in EVERY carrier
+  directory (~24% of CA PC listings are wrong) · a PC-specific Google review flow (**MedGlo has ZERO independent
+  PC reviews — the only two are self-published on its own site**) · and the **existing aesthetics patient base**
+  (already trusts her = the #1 decision factor, zero CAC).
+- **The opening is real and already monetised:** Coastal Concierge, Kolvita, Morris Hasson, Portola, Hoag
+  Concierge all operate in this catchment — people already pay a membership to escape rushed/can't-get-in.
+  MedGlo offers a slice of that **on insurance, no membership fee**. Bilingual is **table stakes**, not a wedge
+  (MemorialCare Laguna Hills, 4.9★/260, advertises 4 languages); the ES pattern may be an **adult child booking
+  for a Spanish-preferring parent**, not the patient themselves.
+- **Needs Josh/Dr. Recalde before any copy (/todo #142):** what PC patients actually said at intake · **is the
+  live site's "seen within 1–2 weeks" claim TRUE today?** (if aspirational it must come off — broken access
+  promises are exactly what patients savage competitors for) · are all listed carriers genuinely in-network ·
+  the real cash price vs the concierge set.
 - **Provisional value bar (Josh's guess, NOT verified):** $150–250/visit, return rate unknown, "feeling they
   will". Checkout data can't settle it — "Medical Consultation" shows avg **$49** (the copay); insurance
   reimbursement never enters this system. **Needs Dr. Recalde's real per-visit reimbursement + return rate.**
