@@ -167,17 +167,29 @@ approvals before acting on gated work.
   MedGlo offers a slice of that **on insurance, no membership fee**. Bilingual is **table stakes**, not a wedge
   (MemorialCare Laguna Hills, 4.9★/260, advertises 4 languages); the ES pattern may be an **adult child booking
   for a Spanish-preferring parent**, not the patient themselves.
-- **Needs Josh/Dr. Recalde before any copy (/todo #142):** what PC patients actually said at intake · **is the
-  live site's "seen within 1–2 weeks" claim TRUE today?** (if aspirational it must come off — broken access
-  promises are exactly what patients savage competitors for) · are all listed carriers genuinely in-network ·
-  the real cash price vs the concierge set.
+- ⭐ **THE PC PROMISE = "SEEN IN DAYS" (Josh, 07-21: _"It should say be seen in days, not weeks. That's the
+  entire promise."_).** The live site **undersells it** — the FAQ says *"New-patient appointments are typically
+  available within 1–2 weeks"* and the stronger "same-week" line is buried in a service tile. Against a **23.5-day
+  national family-med average**, CA timely-access **53.6% and falling**, and local reviews (*"wait until May"*,
+  *"almost two months… couldn't get a call back"*, *"most of their doctors are not taking new patients"*), **days
+  is the wedge** — and it's precisely what the concierge practices in this catchment charge a membership for.
+  MedGlo does it **on insurance, no membership.** On the rebuild it goes **above the fold**, not in an FAQ.
+- **Needs Dr. Recalde (/todo #142, now score 9 — gates all PC copy):** the honest number we can commit to in
+  writing ("usually seen within X days") and whether it holds on a normal week alongside aesthetics · the same
+  for **sick visits** (today/tomorrow? materially stronger claim, state separately) · what PC patients said at
+  intake · are all listed carriers genuinely in-network · the cash price vs the concierge set.
+  ⚠ Whatever we print becomes a promise; broken access promises are exactly what patients savage competitors for.
 - **Provisional value bar (Josh's guess, NOT verified):** $150–250/visit, return rate unknown, "feeling they
   will". Checkout data can't settle it — "Medical Consultation" shows avg **$49** (the copay); insurance
   reimbursement never enters this system. **Needs Dr. Recalde's real per-visit reimbursement + return rate.**
-- **Needs Josh:** approve pausing the PC campaign pending the rebuild (**/todo #139**, saves ~$150/mo of junk
-  traffic; page/calendar/phone stay live). Note the original spec judged the highest-yield PC action to be
-  **telling existing aesthetic patients she does primary care and takes insurance** — not ads; that messages
-  real patients, so it needs its own OK.
+- ✅ **PAUSED 07-21 — Josh approved /todo #139.** `Primary_Care_Practice_Traffic` campaign + all 5 ads set to
+  PAUSED via API and **verified on Meta**: account now **$38/day ($266/wk), 12 active ads (was 17)**. Logged to
+  `agent_changes` #65 with exact prior state → **one-click revert at /agent**. Landing page, the GHL Medical
+  Consultation calendar and (949) 676-7313 all stay live and keep taking organic/referral bookings.
+- ✅ **Josh approved the channel redirect (/todo #141) 07-21.** Next: GBP for the PC line · carrier-directory
+  verification · a PC-specific Google review flow · and the warm channel — **telling existing aesthetic patients
+  she does primary care and takes insurance** (the original spec called this the highest-yield PC action; it
+  messages real patients so it still needs its own OK).
 - **Needs Josh (optional, to enable auto-scaling):** set `weekly_ceiling_max` ($2.5–3.5k) + `capacity_visits_week`
   (Dr. R's true weekly ceiling) at /agent; approve the viral-reel-boost brief. Detail: `MedGlo-marketing/NOTES.md`.
 
