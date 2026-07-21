@@ -1,306 +1,226 @@
 # MedGlo — Now (`now.md`)
 
-_The running state. Keep it short — prune when stale._
+_LEAN living state — the goal, how we work, and a tight per-stream status. Refactored 2026-07-13:
+each stream's full detail + completed-work history moved to **`now-archive.md`** (NOT auto-loaded);
+raw detail also lives in each stream's workshop doc (`MedGlo-marketing/NOTES.md` etc.). **Convention:
+keep this file to current state + open Josh items per stream — push depth to the archive/workshop docs,
+don't let a stream block grow back into a changelog.**_
 
 > ⛔ MedGlo ≠ GoForClose. Never mix the brains.
 
 ## THE ONE GOAL
-**Fill the schedule.** 2026-07-06: only 3 patients in a day, 3 years in, heavy Meta spend, 3 FT staff.
-Josh still to confirm the concrete target (patients/day? booked consults/wk? revenue/mo?).
+**Fill the schedule.** (2026-07-06 baseline: ~3 patients/day, 3 yrs in, heavy Meta spend, 3 FT staff.)
+⚠️ **Josh still to confirm the concrete GOAL number** (patients/day? booked consults/wk? revenue/mo?).
 
 ## HOW WE WORK NOW (Josh, 2026-07-08)
-**One session per work-stream — do NOT mix projects in one session.** Sessions are named
-**"Medglo - <stream>"** so Josh can spot them in his window. The Chief session (MedGlo root) holds
-the picture and reviews everything **weekly** (scheduled) to propose new sessions where we're
-off-goal. When Josh opens a session for a stream, read that stream's block + its workshop doc,
-and stay in that lane.
+**One session per work-stream — don't mix projects.** Sessions named **"Medglo - <stream>"**. The Chief
+(MedGlo root) holds the picture + reviews weekly. Opening a stream session = read that stream's block below
++ its workshop doc, stay in that lane.
+
+**TO-DO BOARD (2026-07-12): every human task/decision lives at `ops.med-glo.com/todo`, NOT in chat.**
+Grouped by person (Josh / Andrea / Dr. Recalde), scored 1–10, numbered steps, Done + Approve/Reject buttons
+(**an Approve there = Josh's written authorization, logged**). All sessions: when you need something from a
+human, INSERT an `action_items` row via the service key instead of asking in chat; check the board for
+approvals before acting on gated work.
 
 ---
 
-## STREAM A — Money/ROI dashboard (`marketing.med-glo.com`)   ← session "Medglo - Dashboard Data Audit"
-**Josh's driver (2026-07-08):** Calysta pull correct? where does the data go? right contacts matched to the right Meta ads?
-**✅ AUDIT DONE + REVENUE ENGINE FIXED 2026-07-08 — GATE RELEASED for Stream C.**
-(Two passes: read-only audit in the Meta-Ads session, then the dedicated Dashboard-Data-Audit session
-independently re-verified it, found the ROOT CAUSE of broken revenue, rewrote the scraper's invoice
-engine, and rebuilt ALL historical invoice data from the EMR overnight. Raw detail:
-`MedGlo-marketing/NOTES.md` §2026-07-08; trust table in `MedGlo-marketing/PROJECT_STATUS.md`.)
+## STREAM STATUS (one block each — full detail in `now-archive.md` + the named workshop docs)
 
-**TRUST — verified to source:**
-- **Ad spend** — fresh (pulls yesterday each 7am), continuous 13 mo, no dupes/holes; per-ad totals match the Ads-Manager-checked 07-06 numbers. Prod Meta token alive.
-- **Lead→ad match** — verified against ALL 7,547 live GHL contacts: 0 mismatches; 989/997 ad-named leads join a real Meta ad_name. Contacts ARE tied to the right ads (Josh's core worry: answered YES).
-- **Lead→patient match** — 25/25 sampled pairs same person (phone AND email agree); 0 false positives in all 152; the risky name-fuzzy fallback has never actually fired.
-- **Booked / Showed / cost-per-booked** — real EMR appointments. 90d: cost/booked ≈ $200, cost/showed ≈ $215. Dashboard math re-computed independently = digit-identical to the site.
-- **Revenue / ROAS / margin table — NOW FIXED AND REBUILT (was structurally wrong, NOT healable).** Old scraper summed the patient page's 3-newest-undated-invoices onto the newest visit: double-counted repeat patients, collapsed recurring GLP-1 payments, counted unpaid invoices, froze Mar–Jun. Rewritten 2026-07-08 to read the EMR's full DATED per-invoice history (paid amounts only, allocated to the right visit); overnight backfill rebuilt all ~930 patients. **FINAL STATE (verified on the live site): invoice coverage 97–100% every month; all-time captured revenue $994k (was $142k, partly double-counted); attributed ad revenue $98k across 151 matched leads; blended 90d ROAS 1.83x real (the old 0.84x was an artifact); cost/booked $200.** Per-ad revenue is now decision-grade: e.g. "$1,680 Mistake" 12.4x, Skip the Chains 2.6x, La Doctora 0.7x (kill validated).
+**A — Money/ROI dashboard** (`ops.med-glo.com` / `marketing.med-glo.com`) · *"Medglo - Dashboard Data Audit"*
+- ✅ Audit done + invoice engine rewritten + all history rebuilt (07-08). Data is decision-grade: invoice
+  coverage 97–100%/mo, all-time captured revenue $994k, attributed ad revenue $98k / 151 leads, blended 90d
+  ROAS **1.83x**, cost/booked ~$200. Per-ad revenue now reliable ("$1,680 Mistake" 12.4x · La Doctora 0.7x kill).
+- Caveats: "booked" includes ~5% cancels (use "showed"); newest ~2wk under-counts (judge on 90d); `monthly_costs` empty.
+- **Needs Josh:** payroll / rent / product-COGS % for `monthly_costs`. Detail: `MedGlo-marketing/NOTES.md`, `PROJECT_STATUS.md`.
 
-**Caveats that remain:** "booked" includes booked-then-cancelled/no-show (~5%) — "showed" is the strict metric; newest ~2wk under-count (11-day lead→appt lag) → judge on 90d; 112 organic-FB leads sit in "Unattributed"; monthly_costs still empty (P&L "Net" only subtracts ad spend until Josh supplies payroll/rent/COGS); margin table treats Botox as $0 margin by design.
-- **Needs Josh:** payroll / rent / product-COGS % for `monthly_costs`.
+**B — GHL AI booking bot** · *"Medglo - GHL AI Bot"*
+- ✅ LIVE since 07-08. Primary + Auto Pilot 24/7, all 6 channels, books into the 5 real calendars, human
+  handover on. Tested 15 EN+ES scenarios; never quotes gated prices, no medical advice.
+- **Needs Josh:** promo number ($9 vs $9.99) · deposit timing · min age · is GLP-1 med cost in the $450? ·
+  chem-peel/glutathione/peptide prices. Send Andrea the guide (`ghl-ai-bot/ANDREA-MONITORING-GUIDE.md`).
+- ⚠️ Public booking page still offers "Salmon DNA & Vampire Facial" but staff say NO — rename/remove that calendar.
 
-## STREAM B — GHL AI booking bot   ← session "Medglo - GHL AI Bot"
-- **State: ✅ LIVE since 2026-07-08 (a day early).** "Appointment booking bot" = **Primary + Auto Pilot,
-  24/7**, all 6 channels (SMS/IG/FB/Chat Widget/Live Chat/WhatsApp). KB attached (Bot Training trigger),
-  playbook-voice prompt, booking into the 5 real calendars (Botox / Aesthetic Consultation / PICO /
-  Tattoo-consult / Medical Consultation — NOT "Free Consultation", which turned out to have 0 real
-  appointments ever). Human Handover ON (3 scenarios → assign Andrea + task + tag); Andrea takeover =
-  just reply manually (bot sleeps 2h in that thread). Reschedule enabled; cancel stays human.
-  **Tested: 15 EN+ES scenarios** — all gap topics hand off (never quotes promo/tattoo/peel prices,
-  min age, GLP-1 med inclusion), no medical advice, booking offers exactly 2 real slots. One language
-  bug found+fixed in testing. Raw log: `MedGlo-marketing/ghl-ai-bot/NOTES.md`.
-- **Andrea's 1-page guide:** `MedGlo-marketing/ghl-ai-bot/ANDREA-MONITORING-GUIDE.md` (watch, take over,
-  log wrong answers → trained in weekly). Josh: send it to her.
-- **Needs Josh (bot hands these to a human until answered):** public Botox promo number ($9 vs $9.99);
-  deposit mention timing; min age; is GLP-1 med cost in the $450?; chem-peel/glutathione/peptide prices.
-- **Watch (first week):** first real bot booking → confirm the confirmation/reminder workflow fires;
-  weight-loss threads (med-inclusion answer defers to consult); weekly training pass from Andrea's log.
-- **Flag:** public booking page still offers "Salmon DNA & Vampire Facial" calendar but staff say NO
-  vampire facial/PRP — bot answers correctly; the page contradicts it. Rename/remove the calendar.
+**C — Meta ad improvements** · *"Medglo - Meta Ads"* · gate released 07-08
+- 4 wasteful ads killed 07-06 (~$1k/mo stopped). New creative APPROVED (anti-upsell / natural-results /
+  semaglutide) — production = Dr. Recalde first-person phone video + Fiverr edit only, statics launchable first.
+  Board LIVE; **Josh APPROVED the static-launch GO (score 9)** — statics launch $75/wk each after critic + his
+  per-creative approval at /creative.
+- **Needs Josh:** before/after photos · Dr. Recalde's 3 phone videos · greenlight the static launch · confirm
+  old account (act_843962204029189) stays disabled. ⚠️ Pre-launch fixes flagged in `NEW-AD-CREATIVE.md`
+  (calendar-first close; route injectables to real Botox/Aesthetic calendars not the dead "Free Consultation").
+  Start: `MedGlo-marketing/AD-RESCUE-PLAN.md`.
+- **RETARGETING (built 07-17, "Medglo - Growth Engine" session): PAUSED + fully staged.** 6 warm audiences
+  (site/GHL pixels 180d, IG/FB engagers 365d, form-openers; submitters + patient list EXCLUDED) +
+  `MedGlo_Retargeting_2026-07` (EN $8/d + ES $3/d, 15mi, $77/wk ≈ standard test budget) + 3 critic-passed
+  creatives (RT-300/301/302, all 8/10, real verified photos). **Needs Josh: approve RT creatives at /creative
+  + Approve /todo #91** → launch+activate run in minutes (activate hard-refuses without the board OK).
+  ⚠ Found: fingerprint pixel 735… SILENT since 06-15; the site fires pixel 1216… via GTM → fix = /todo #92.
+  Doc: `MedGlo-marketing/RETARGETING.md`.
+  ✅ **07-19 RESOLVED — RT creative is READY at 9/10.** The overlay compositor (draws the hook onto Dr. Recalde's
+  UNtouched real photo in brand fonts — no AI face-repaint) + the recalibrated critic now produce genuine 9/10
+  real-photo ads. **All 3 RT ads are `ready_for_josh` at 9/10** on /creative: CQ-300 EN "Maybe you need less.",
+  CQ-301 EN "Refreshed, not frozen" (white-coat, MD visible), CQ-302 ES "Te diré qué no necesitas". **Needs Josh:
+  approve them at /creative + Approve go-live card #91 (+ the Custom-Audience ToS click) → retargeting launches.**
+  Detail in `MedGlo-marketing/RETARGETING.md` + the iterate-to-10 loop in Stream G.
 
-## STREAM C — Meta ad improvements   ← session "Medglo - Meta Ads" · **✅ GATE RELEASED 2026-07-08 (Stream A verdict posted)**
-**Cleared to start.** Primary metric: **cost per booked/showed** (≈$200/$215 at 90d). **UPDATE (07-08 ~05:45):
-revenue/ROAS are now ALSO decision-grade** — invoice engine rewritten + ALL history rebuilt from paid EMR
-invoices; coverage 97–100% every month (see Stream A). **RE-PULL all per-ad numbers before deciding — they
-changed materially** (90d: "$1,680 Mistake" 12.4x · Skip the Chains 2.6x · La Doctora 0.7x/kill validated ·
-blended 1.83x). Pre-March history exists now. Deliverables: confirm the right ads are running after the
-2026-07-06 kills, and give Josh **exact ad copy** for what runs next.
-**Note:** account-verification needs the live Meta token (blank in local `.env`) — Josh must paste it or do the System-User steps in PROJECT_STATUS.md. Rescue-plan per-ad numbers RECONCILE vs live (La Doctora $533/28 leads/0 booked; Pico reel $483/17/0 booked — both confirmed 0-booked losers).
-- **State:** 4 wasteful ads killed 2026-07-06 (5 ad toggles OFF; ~$1k/mo stopped — the 2 live spenders
-  were "La Doctora" Spanish $533/30d and "We used our Pico" reel $500/30d). New creative APPROVED
-  (anti-upsell, natural-results, semaglutide) — copy written; production plan = Dr. Recalde first-person
-  phone video, Fiverr for editing only, NO influencer, static image ads can launch first. Budget
-  reallocation authorized but NOT executed (held until creative exists).
-- **Next session's job:** build the 3 new campaigns **PAUSED** (static versions launchable now, video
-  when shot); execute the budget scaling and log it; judge everything on **cost per booked**, not CPL.
-- **Start here:** `MedGlo-marketing/AD-RESCUE-PLAN.md`, `NEW-AD-CREATIVE.md`, `ad-production-guide.md`.
-- **Needs Josh:** before/after photos (or "use the site's"); Dr. Recalde's 3 phone videos; greenlight the
-  static launch; confirm old "MedGlo" account (act_843962204029189) is still disabled (MedGlo3 is active).
+**D — Primary care ads + community outreach** · *"Medglo - Primary Care Outreach"*
+- Landing pages live (`/primary-care/`, `/es/atencion-primaria/`), $5/day cap approved, insurance now accepted.
+  Andrea outreach drafts done (8 variants, ~22 groups) — **AWAITING Josh's yes/no per variant; nothing posts w/o OK.**
+- **Needs Josh:** full insurance list · the 15-min GHL UI task · Meta token refresh · Dr. Recalde photos ·
+  approve outreach per variant. No paid spend without written OK. Detail: `primary-care/ANDREA-OUTREACH-GUIDE.md`.
 
-## STREAM D — Primary care ads + community outreach   ← session "Medglo - Primary Care Outreach"
-- **State:** Landing pages live (`/primary-care/`, `/es/atencion-primaria/`); Josh approved "go for it",
-  **$5/day cap**; website PR #103 merged. Insurance now accepted for primary care (was cash-only until ~June).
-- **Community outreach via Andrea — DRAFTS DONE 2026-07-08, AWAITING JOSH's yes/no per variant.**
-  Deliverable: `MedGlo-marketing/primary-care/ANDREA-OUTREACH-GUIDE.md` — 8 post variants (A warm
-  intro · B empathy · C meet-the-doctor · D business-share-day · E comment-reply · F mom-group ·
-  G/H Spanish), ~22 target groups across MV/Ladera/RSM/Lake Forest/Aliso Viejo + Latinos en OC,
-  6-week cadence, comment/DM playbook (route to (949) 676-7313 / med-glo.com/primary-care, manual
-  GHL entry for DM leads), don'ts. Etiquette research confirmed Andrea-as-herself-with-disclosure
-  is the right shape; mom groups mostly promo-thread-only. Both landing pages re-verified live;
-  all claims match the page (1–2 wks new patients, same-week *effort*, adults 18+).
-  **NOTHING POSTS until Josh writes OK per variant here.**
-- **Also next:** build GHL workflows (`primary-care/GHL-SETUP.md`), refresh Meta token, build campaign PAUSED,
-  Josh activates. **No paid spend until Josh's written OK here.**
-- **Needs Josh:** full insurance list; the 15-min GHL UI task; Meta token refresh; Dr. Recalde photos.
+**E — Marketing scorecard** (`ops.med-glo.com/scorecard`) · *"Medglo - Scorecard"*
+- ✅ LIVE. 9 KPIs; revenue is the HERO w/ pace bar; "road to $100k/mo" stages; weekly budget call from 3 gates
+  (first verdict RAISE → $830/wk). Andrea read-only pw `glow2026`. Ops hub restructured (Overview / Marketing /
+  Scorecard / Creative / Meta Agent / Bookkeeping / Settings; breakeven ≈ $52k/mo; June P&L ≈ −$684).
+- **Needs Josh:** confirm/edit the DRAFT goals + road stages at `/scorecard/goals` (still all "draft") · real
+  overhead/COGS (does $30k include Dr. R's pay?) · the Botox per-unit margin question.
 
-## STREAM E — Marketing scorecard   ← session "Medglo - Scorecard"
-- **✅ LIVE 2026-07-08: https://marketing.med-glo.com/scorecard** — 9 KPIs, each with last-week value,
-  goal line, green/yellow/red, 12-week trend bars. Mobile-tested. Weekly ritual printed on the page
-  (Mon 15 min, Josh + Andrea, one action per red tile). **Andrea's read-only password: `glow2026`**
-  (opens ONLY the scorecard; the admin password still opens everything).
-- **Reply-speed + waiting-on-reply KPIs REMOVED 2026-07-08 (Josh: measurement unreliable for now).**
-  Was 11 KPIs, now 9. The **main dashboard's "is anyone answering?" follow-up panel was ALSO removed
-  2026-07-08** (Josh is sharing the dashboard with Andrea + reply-time metric has the automated-send
-  accuracy caveat). The `lead_followup` sync + table still run daily — data is intact, only the two
-  UI surfaces are gone; easy to restore or move to an internal-only page later.
-- **V2 SHIPPED 2026-07-08 (Josh's direction):** revenue is now the HERO — this week vs weekly goal with
-  a pace bar ("through Tue, you'd want ~$X by now"), fixing the last-week/this-week confusion (all big
-  numbers labeled "last week"; pace lines account for the ~1-day sync lag). Added **the road to $100k/mo**
-  ($12k → $16k → $19k → $23k/wk = $100k/mo where a hired physician becomes affordable → $30k/wk = Dr. R
-  steps back — DRAFT, Josh to confirm) + **weekly budget call** (RAISE/HOLD/CUT next week's ad spend from
-  3 gates: cost/booked ≤$200 4wk · 90d ROAS ≥1.5x · show ≥85%; advisory only, Josh executes — this exact
-  rule is what the future ads agent will run, so its moves stay auditable) + **actions list** (per-ad
-  moves from live 90d data + one fix per red tile). First live verdict: **RAISE → $830/wk** (all gates
-  pass: $139/booked, 1.8x, 93%).
-- **GOAL MATH (draft for Josh):** clinic reality post-rebuild = ~$46-50k/mo, avg ticket $313, trailing
-  4wk $11k/wk. At ~55% est. margin with $30k/mo overhead (Josh's rough number, seeded into monthly_costs
-  Jan–Dec 2026 → P&L "Net" is live) + ~$30k/mo replacement physician: **$100k/mo ≈ break-even for hiring
-  the physician; ~$130k/mo = comfortable step-back.** $100k/mo = ~74 visits/wk (12/day) at current ticket.
-- **DRAFT GOALS (Josh to confirm/edit at /scorecard/goals):** leads 26/wk · lead→booked 15% (now 12%) ·
-  show rate 85% (now 93%) · new patients 11/wk (now ~9) · primary-care visits 3/wk ramp (north star
-  25/wk = 5/day; now ~0) · revenue $12k/wk (= road Stage 1; bump this goal to advance stages) ·
-  ad budget ≤$800/wk (budget call moves it) · cost/booked ≤$200 (audited 90d actual) ·
-  +2 Google reviews/wk (count = manual weekly entry by Andrea).
-- **AD-TABLE FIX 2026-07-08:** Josh confused why an ad read CUT (top profit table) vs REVIEW (bottom
-  funnel table). The bottom table now judges **cost per booked** (EFFICIENT/OK/EXPENSIVE/NO BOOKINGS,
-  col "Booking efficiency") instead of raw ROAS — two clear lenses (booking efficiency vs profit
-  margin), not a contradiction.
-- **✅ BOTOX-MARGIN FIXED 2026-07-08 (Josh: Botox ~$5/unit cost, ~$10 sale = 50%, NOT $0).** The engine
-  had Botox HARDCODED out of profit (info-only bucket); now it contributes at its product margin
-  (neurotoxin 50%, editable). Effect: "$1,680 Mistake" −$264 CUT → **+$3,323 SCALE** (now agrees with
-  funnel EFFICIENT + scorecard); La Doctora −$1,132 → +$500 (lifetime ~breakeven — recent funnel/actions
-  still flag it; kill stands on lead quality). `/settings` got example procedures per group + a
-  pay/charge→% calculator for Dr. Recalde (percentage model needs no unit counts — product cost scales
-  with revenue). **LTV IS captured** — the engine sums ALL post-acquisition visits across every service,
-  so a Botox ad gets credit for whatever those patients buy later (Josh's core hope: answered YES).
-- **✅ INSTAGRAM organic pull LIVE 2026-07-08.** `/api/instagram` pulls @medglo.oc (IG id
-  17841429678372109) post reach/saves/shares/engagement → `instagram_posts` table; daily cron
-  7:20am PT (`instagram-pull.yml`). Setup done end-to-end: added the "Manage messaging & content on
-  Instagram" use case + `instagram_basic`/`instagram_manage_insights` to the MedGlo Analytics app;
-  Josh generated a **never-expiring System User token** (medglo-analytics SU) → Vercel `IG_ACCESS_TOKEN`
-  (separate from the ads `META_ACCESS_TOKEN`, which was verified still working). NOTE: that token also
-  carries ads_management + full Page/IG/ad-account access → it's the future agent's key too (treat as
-  sensitive; revoke from the SU screen if leaked). Insight metrics use `views` (impressions/plays were
-  deprecated). **First finding: a June-22 reel ("be kind to all patients") hit 73k reach / 2,936 shares
-  — a viral organic post worth boosting as an ad.** Warm/human reels >> informational ones.
-- **META-AD AGENT — GREENLIT 2026-07-08, Josh spinning up its own session ("Medglo - Meta Agent") via Chief.**
-  Full kickoff prompt handed to Chief (Scorecard session wrote it). **DECIDED design (Josh's call):**
-  agent **ACTS autonomously** (adjusts budgets, toggles ads on/off, tests concepts) — NOT advisor-first —
-  and **catalogs every change to a dashboard change-log with EXACT prior-state + one-click Revert** (revert
-  via Meta API so Josh never digs through Meta; Andrea sees changes too). **Safeguards = the money protection
-  (revert does NOT refund spent $):** hard caps (weekly ceiling/circuit-breaker, per-ad daily max, ±20%/wk
-  change cap), anti-"$1k-on-a-dud" auto-kill (respect the 11-day booking lag — pause after ~2-3wk/$150-200
-  spent w/ 0 booked), learning-phase spend cap + kill-by date, global kill switch, no thrashing. Optimize on
-  **cost per booked/showed + true-profit/cross-sell, NEVER CPL or raw ROAS.** Key = the medglo-analytics SU
-  token (ads_management; give agent its own env var). Existing-ad toggle/budget = autonomous; NEW creative
-  goes through Andrea + `message-playbook.md`. Reuses the scorecard budget-call/actions engine as its brain.
-  **Needs Josh (agent session will ask):** hard $ caps, may-it-create-new-ads-or-only-toggle, creative-brief
-  turnaround. **Data-source plan (NOTES.md):** class A = performance (have; ADD creative-level ad metrics
-  [queued — task chip], IG organic [LIVE], Google Business Profile); class B = trend/creative-intel (Meta Ad
-  Library, Google Trends, own reviews/GHL, TikTok) for GENERATING creative, human-gated. Ahrefs = own-site SEO
-  not trend detection; Apify private-FB-group scraping = AVOID (ToS/legal/noise), public content only.
-- **✅ CREATIVE-METRICS PULL LIVE 2026-07-08.** `/api/creatives` joins Marketing API /ads (copy, headline,
-  format, thumbnail, CTA) + /insights (hook/hold/CTR/video-retention/quality rankings/leads) per ad →
-  `creative_metrics` table (87 ads loaded); daily cron 7:10am PT. Uses existing ads_read META_ACCESS_TOKEN.
-  **All 3 Meta-Agent data streams now live: ad performance + IG organic + creative metrics.**
-  **Early creative findings:** doctor-wedge STATIC ads win CTR (Skip-the-Chains 3.1%, No-Pressure 2.9% —
-  playbook copy works); reels hook ~95% (autoplay) but HOLD poorly (3.6–13.8%; warm/human "We used our Pico"
-  held best 13.8%, informational reels <5%) → reels need a stronger middle/payoff. Caveats: quality_ranking
-  UNKNOWN until an ad clears Meta's impression threshold; dynamic-creative ads capture only the first body variation.
-- **✅ DOMAIN: canonical URL is now `ops.med-glo.com` (2026-07-08).** `marketing.med-glo.com` still resolves
-  (both point to the same Vercel "app" project). GitHub secret `VERCEL_APP_URL` updated → `https://ops.med-glo.com`,
-  so all 5 daily crons (meta/instagram/creatives/attribution/agent-run) now hit ops — verified live. Login is
-  per-host, so re-login on the new domain. Don't remove marketing.med-glo.com without confirming crons still fire.
-- **✅ OPS HUB restructure LIVE 2026-07-08 (Josh: make it operations.med-glo.com someday).** Shared **top nav**
-  on every page: Overview · Marketing · Scorecard · Creative · Meta Agent · Bookkeeping · Settings.
-  **`/` is now an OVERVIEW** (summary + links): "what the practice MADE last full month" P&L with **cost of
-  supplies (COGS) shown SEPARATELY from overhead** (Josh's ask) + a **breakeven ≈ $52k/mo** + this-week
-  snapshot. The money dashboard moved to **`/marketing`** (its P&L gained a "− Supplies" column;
-  Net = Revenue − Supplies − Ad − Overhead). **`/creative`** = the IG-posts + creative-metrics tables (the
-  visibility Josh wanted). **`/bookkeeping`** = overhead-on-file + honest $30k-estimate note (future books
-  tie-in). COGS = per-visit invoice × (1−margin) from /settings; Overview & Marketing revenue reconciled
-  (both count all paid-invoice rows). **June real P&L: $51k revenue − $18.7k supplies − $3k ad − $30k
-  overhead = −$684 (roughly breakeven — WHY we must grow).** `lib/pnl.ts` shares the math.
-- **✅ scorecard_goals table created (Josh ran the SQL 2026-07-08)** — goals now editable at
-  /scorecard/goals; still all "draft" (setByJosh empty) until Josh sets real numbers.
-- **Needs Josh:** (1) confirm/adjust the draft goals + road stages at /scorecard/goals (esp. the
-  revenue goal = Stage 1); (2) real overhead/COGS + does $30k include Dr. R's pay?; (3) to activate
-  Instagram: mint a Meta token with the IG scopes (NOTES.md); (4) the Botox per-unit margin question.
-- **Caveats:** ⚠️ **UPDATE — Stream A's "don't-trust-revenue" verdict is RESOLVED as of 2026-07-08:**
-  the invoice engine was rewritten + all history rebuilt, coverage is now 97–100% every month, so
-  revenue/ROAS are trustworthy and the "revenue is a floor" coverage banner auto-clears (it only
-  shows below ~90%). The scorecard's live coverage check still guards correctly if capture ever dips. The
-  med-spa/primary-care split counts the **"Medical Consultation" appointment type in CalystaPro** —
-  front desk must book PC visits under that type or they count as med-spa. Google review count has
-  no API. A custom warning banner can be set at /scorecard/goals (no redeploy) once the SQL is run.
+**F — Meta Agent (daily ad-optimization)** · *"Medglo - Meta Agent"*
+- 🟢 FULLY LIVE 07-08, caps confirmed, acts autonomously within caps. **Caps:** weekly ceiling $850 · per-ad
+  $60/day · auto-kill ≥17d + ≥$175/90d + 0 booked · ±20%/wk · max 3 changes/run · **toggle/budget of EXISTING
+  ads only, may NOT create new ads.** Daily cron 10am PT; every change logged w/ exact prior state + one-click
+  Revert. Value-based scaling + both 07-12 flaws fixed (cohort-booking gate, reflow-pause).
+- **NEW CAP 07-13 (Josh: "$100 max per day total — per-ad caps can't protect against 20 ads"):**
+  `daily_spend_ceiling` **$100/day TOTAL across all ads** (editable at /agent), enforced 3 ways: preventive
+  (sum of active daily budgets binds to min($850/7, $100) — no raise/activation can exceed it), reactive
+  (yesterday > cap×1.25 → raises freeze, cuts run — NOT a full halt, so the rebalancer can trim the weakest
+  spend until it fits), + the future new-ad launch path refuses over-cap launches. **Verified by live dry run;
+  FINDING: yesterday was $136 → agent's raises are NOW frozen and it will trim weakest ads toward $100/day
+  (~$-250/wk vs the $850 ceiling). If Josh meant a looser guard, raise the number at /agent.**
+- **Needs Josh (optional, to enable auto-scaling):** set `weekly_ceiling_max` ($2.5–3.5k) + `capacity_visits_week`
+  (Dr. R's true weekly ceiling) at /agent; approve the viral-reel-boost brief. Detail: `MedGlo-marketing/NOTES.md`.
 
-## STREAM F — Meta Agent (daily ad-optimization agent)   ← session "Medglo - Meta Agent"
-- **🟢 FULLY LIVE 2026-07-08 — caps confirmed, first live run executed & verified on Meta.** Josh
-  pasted the SQL, seeded the caps (agent_settings, caps_confirmed=1), and approved the first run.
-  **First LIVE run (run #17, 3 changes, all applied+verified):** (1) PAUSED "Girl Math PICO Summer -
-  IG Reel" (0 booked on $189, matured); (2) RAISED "Tattoo_Removal_Laser_Spanish_V1" campaign budget
-  $20→$24/day (cheapest proven booker, scorecard RAISE); (3) REACTIVATED "$1,680 Mistake — Refresh #1"
-  (12.4x, $49/booked winner) — budget-neutral, it lives in an already-active ad-set so it just
-  competes for existing budget. Net +$28/wk → ~$700/wk, under the $850 ceiling. Every change is in
-  the /agent log with exact prior state + one-click Revert. Daily cron `agent-run.yml` 10am PT now
-  runs it autonomously within the caps.
-- **KEY DESIGN FIXES made during go-live (all committed):** (a) write token falls back to
-  IG_ACCESS_TOKEN — no new Vercel env needed (55f0ae5); (b) **ceiling is holder-level**: a reactivate
-  into a live ad-set is correctly budget-neutral, and a winner blocked by the ceiling is funded by a
-  **rebalance** (pause the weakest sub-gate spend) rather than deferred — a hard-cap guard guarantees
-  no run ever exceeds the ceiling (3c859a6); (c) reactivate only ever targets an ad whose ad-set is
-  already ACTIVE, so it always delivers and never no-ops on a duplicate-named ad in a dead ad-set (7fabedd).
-- **✅ VALUE-BASED SCALING added 2026-07-08 (commits a840246/a1d9ec7) — answers Josh's "how do I
-  know when to raise budget / what should it be each week?"** The scaling bar is no longer a flat
-  $200. The agent computes what a booked patient is WORTH (attributed LTV $645/patient × 55% margin
-  = ~$355 margin, a floor) and scales ads that book up to a **value ceiling** = margin × 70% payback
-  − Andrea ≈ **$214/booked** (`scaleCeiling = max(goal gate, value ceiling)` — only ever adds
-  headroom). New `/agent` "Budget & scaling" panel shows LTV, the value ceiling, recommended
-  next-week budget, and weekly visits (~33/wk now vs the ~74/wk = $100k/mo capacity). Two new levers,
-  **both OFF by default** (Josh opts in at /agent): **capacity_visits_week** (freezes raises near a
-  visits/wk limit so it never buys appointments the schedule can't serve) and **weekly_ceiling_max**
-  (lets the agent RATCHET its own weekly ceiling ~15%/wk toward a hard max Josh sets — the "drive up
-  the road to $100k on its own"; every ceiling raise is logged + revertible, never past the max).
-  Key teaching Josh now gets: "ROAS>1 = scale" is wrong (need ~1.8x just to break even at 55% margin);
-  budget is an OUTPUT (fill the schedule at a profitable cost/booked), capped by value OR capacity;
-  and his "3 patients/day" was a FUNNEL problem (now fixed by the bot), not too little budget.
-- **NEEDS JOSH to enable auto-scaling (optional, when ready):** set **weekly_ceiling_max** (e.g.
-  $2,500–3,500 — the real outer limit) so the agent ratchets the weekly ceiling up on its own as the
-  numbers justify; and **capacity_visits_week** (Dr. Recalde's true weekly visit ceiling) so it holds
-  once the schedule fills. Until set: agent scales within the fixed $850 ceiling only, and the panel
-  just RECOMMENDS next week's number.
-- **BUILT + DEPLOYED 2026-07-08 (commit 4b08897).** All 5 build stages
-  shipped: caps/settings + change-log with exact-prior-state + one-click Revert (`/agent` page,
-  Andrea's viewer login sees it read-only) · Meta write layer (pause/activate/budget, verify-after-
-  write, revert = re-apply prior state) · daily decision engine extending the scorecard LADDER
-  (auto-kill matured 0-booked ads, learning-phase caps + kill-by, ladder raise/cut on the cheapest/
-  most-expensive booker, reactivate proven winners; ±20%/wk, no-thrash, max-changes/run, weekly
-  circuit breaker, cost/booked auto-halt, kill switch) · learning loop (expected→actual→verdict
-  after 14d) · creative-brief loop (viral-IG + fatigued-winner briefs → Andrea, Josh approves at
-  /agent; NEVER auto-launched). Cron: `agent-run.yml` daily 10am PT. Raw detail: `MedGlo-marketing/NOTES.md`.
-- **AUTHORIZATION (Josh, written, 2026-07-08):** the agent ACTS autonomously (no advisor phase) on
-  toggles/budgets of EXISTING ads — valid because the caps are confirmed (below). New patient-facing
-  creative is NEVER auto-launched: brief → Andrea → playbook QA → Josh reviews.
-- **✅ CAPS (Josh, 2026-07-08 — live in agent_settings, caps_confirmed=1):**
-  **weekly ceiling $850** (circuit breaker halts ALL changes) · **per-ad daily max $60** ·
-  auto-kill defaults (**≥17 days old + ≥$175/90d + 0 booked → pause**) · learning-phase test
-  budget **$75/wk** (kill-by = auto-kill date) · max ±20%/wk per ad · max 3 changes/run ·
-  **toggle/budget of EXISTING ads only — the agent may NOT create new ads** (allow_new_ads=0;
-  new creative stays brief→Andrea→Josh). All editable at marketing.med-glo.com/agent anytime;
-  emergency stop (kill switch) on the same page.
-- **Watch this week:** (1) confirm "$1,680 Mistake" delivers (was IN_PROCESS/review right after
-  enabling — should go ACTIVE); (2) the 1 creative brief the agent drafted (boost the viral Jun-22
-  reel, 73k reach) is waiting for Josh's approval at /agent → then Andrea; (3) the daily 10am cron's
-  runs — the learning loop fills in each change's actual outcome ~14 days later.
-- **Note:** the creative-level ad-metrics pull (`/api/creatives`) is now feeding `creative_metrics`
-  (table created during go-live; its cron will keep it fresh). It powers the agent's fatigue briefs.
+**G — Meta Ad Creations (creative-QA critic)** · *"Medglo - Meta Ad Creations"*
+- 🟢 LIVE 07-09 at `ops.med-glo.com/creative`. Independent critic between Andrea and the agent: hard gates
+  (playbook/medical/consent/brief-fidelity) + 1–10 craft score; Andrea can "Send to Josh" at any score; Josh
+  approves on the page. Scoped auto-launch plumbing DEPLOYED but **OFF (`allow_new_ads=0`) — DO NOT flip without Josh.**
+- **ITERATE-TO-10 LOOP (Josh 07-17, "the agent must get ads to 10/10, kill below 9, don't loop forever, ≤$3/creative"):**
+  the critic's fixes are no longer ignored — `lib/creative-improve.ts` loops apply-fix→regenerate→rescore→keep-best,
+  switching image model on a plateau, until 10 (→Josh) / plateau≥9 (→Josh) / exhaust rounds+budget <9 (→AUTO-KILL,
+  never shipped). Settings at /agent: `creative_target_score`10 `creative_min_score`9 `creative_max_rounds`6
+  `creative_gen_budget_usd`3. PROVEN live: CQ-94 climbed 4→8.5 (fixed typos+photo); CQ-300 tried 6 rounds, plateaued
+  8.5, auto-killed at $0.33. Real cost is pennies (maxRounds is the limiter). Daily cron drives it ≤14×/run.
+  **07-19: the loop now SELF-HEALS a CTA mismatch** (reviser returns the `cta`; `runOneRevision` writes it —
+  was spinning CQ-300 to auto-kill on "Sign Up" vs a "Book Now" close). Shipped+deployed, confirmed live. ⚠ found
+  in passing: 18 versions store `cta="Reservar"` → CTA_MAP misses it → those ES ads would launch w/ LEARN_MORE
+  not BOOK_NOW. ✅ **FIXED 07-21 by STREAM J** — one shared ES+EN CTA map in `lib/routing-gate.ts`; an unmappable CTA
+  is now a hard gate failure, never a silent LEARN_MORE fallback.
+- ✅ **REAL AD PREVIEW LIVE 07-21** (Josh, repeatedly: "the preview I'm getting is of the image and not what the
+  actual ad preview will look like"). `/creative` now leads with **Meta's own render** of each card — page name,
+  "Ad ·", primary text with Facebook's real "…See more" truncation, headline/description row, CTA button, link
+  domain, placement crop — switchable across IG Story / FB Story / IG Reels / FB Feed / IG Feed, ordered by the
+  creative's aspect and MedGlo's own 90d placement numbers. A "What actually ships" panel states the exact button
+  enum, click destination and launch path (CTA + default destination read from Stream J's `lib/routing-gate.ts`,
+  so preview = what ships). Raw image demoted to a click-to-enlarge thumbnail. **If Meta can't render it the card
+  fails in red — never a silent fall-back to the picture.** Verified live on growth.med-glo.com.
+  **Why 07-19's attempt didn't work:** it was never wired into the page, AND it used `POST /adcreatives` →
+  `/previews`, which the app's **Development Mode** blocks. The endpoint that works is `GET
+  act_<id>/generatepreviews` with an inline spec — it creates no ad and spends nothing, so dev mode never applies.
+  (Dev mode still blocks the actual LAUNCH — `/todo meta-app-live-mode` stands.) Detail: `MedGlo-marketing/NOTES.md`.
+- **Needs Josh:** look at one card on /creative and confirm the preview is what he meant (`/todo` #129); decide when
+  to flip `allow_new_ads`; approve brief #20. `ANTHROPIC_API_KEY` in Vercel (rotate if concerned).
 
-## STREAM G — Meta Ad Creations (creative-QA critic agent)   ← session "Medglo - Meta Ad Creations"
-- **🟢 FULLY LIVE 2026-07-09 at ops.med-glo.com/creative — built, deployed, end-to-end tested.**
-  The independent CRITIC between Andrea and the Meta Agent. Flow (all working): brief → Andrea
-  uploads at /creative (her existing viewer login now opens it; big form, files go browser→Supabase
-  Storage so 50MB videos work; videos get 4 frames auto-extracted so the critic can SEE them) →
-  critic (claude-opus-4-8 vision, `lib/critic.ts`) applies **hard gates** (playbook LAW / medical /
-  consent / brief-fidelity) then a **1–10 craft score** with concrete plain-English fixes →
-  **goal is 9/10 but Andrea can "Send to Josh" at ANY score** (Josh's call — goal, not gate) →
-  Josh approves/rejects on the page (who/when/version recorded) → export launch package OR agent
-  launch (below). Tables: creative_queue/versions/reviews, brief_reviews, creative_inspiration
-  (migration 012, Josh ran it); private `creative-assets` bucket.
-- **First live review (demo CQ-1, real Claude run):** 6.5/10 on a laser-image + anti-upsell copy —
-  caught the image/copy mismatch, the laser≠doctor-lean-in rule, and flagged the patient quote for
-  verification. The critic is strict and cites the account's own benchmarks. ~$0.10/review, ~25-55s.
-- **Brief pushback LIVE:** critic reviews every agent brief before Andrea produces (daily cron
-  `creative-critic.yml` 10:30am PT + button on /creative); flags go to Josh to arbitrate
-  (proceed / agree-kill). Tested on brief #20 (viral-reel boost): correctly cleared it "ok".
-- **Calibration loop LIVE:** launched creatives (ad name "CQ-<id> …") get predicted CTR/hook/hold
-  checked vs creative_metrics + cost/booked after 14d; "Is the critic any good?" panel on /creative.
-- **Scoped launch plumbing DEPLOYED but OFF:** when Josh flips **allow_new_ads=1** at /agent, the
-  daily agent run may create ads **ONLY from Josh-approved creative_queue rows** (image creatives;
-  learning $75/wk + kill-by end date; logged in the change log, Revert = pause). Until then Josh
-  launches manually from the export package. **DO NOT flip without Josh.**
-- **Inspiration board LIVE (real Meta Ad Library research 2026-07-09):** 9 entries incl.
-  **NAKED MD (Mission Viejo) running "every injection performed by a registered nurse — no
-  exceptions" since Jul 2** — a competitor fighting on our who-injects axis where an RN is their
-  ceiling; and a year-running LA doctor-credibility+free-consult formula. Refresh via Ad Library
-  links on the page or ask this session.
-- **Needs Josh:** (a) nothing to go live — it IS live; (b) decide when to flip allow_new_ads;
-  (c) brief #20 (viral-reel boost) still awaits his approve at /agent; (d) note: the demo CQ-1 row
-  can be rejected/ignored. ANTHROPIC_API_KEY is in Vercel (added 2026-07-09; treat as semi-exposed —
-  it passed through chat — rotate at console.anthropic.com if concerned).
+**H — Customer focus group** · *"Medglo - Focus Group"*
+- 🟢 BUILT 07-11. 5-seat panel cloned from 929 calls + 6,445 threads; skill at `~/.claude/skills/focus-group`;
+  test any draft with **`/focus-group "<draft>"`**. **Proven LAW: physician-forward beats price-forward** (converts
+  the ideal seats, repels bargain-hunter "Brenda") — now in `Competition/message-playbook.md`, `voice.md`, the bot
+  + ad + critic docs. Levers: calendar-first (availability, not price) · keep-the-ball intake · dose-sized loyalty touch.
+- **Needs Josh:** persona-lens edits are GUIDANCE until your OK — approve the physician-forward Botox rewrite for
+  live ads + the loyalty-framed Rosa / Brenda-proof messages. Detail: `reference/focus-group-findings.md`.
+
+**I — AI ad-image generation** · *"Medglo - AI Ad Creative"*
+- 🟢 PHASE 1 + **Creative Director agent LIVE 07-13** at `ops.med-glo.com/creative` — the agents invent grounded
+  ad concepts from live evidence (own metrics, competitor board, IG organic, VERIFIED VoC quotes, photo library)
+  + render via Gemini & GPT image models + auto-score via the critic. **Hard lines enforced structurally:** no
+  synthetic patients/results, Dr. Recalde's face only from real photos, critic reviews every one. First cycle
+  proven (CQ-15/16). Caps: $50/mo soft, director 6 concepts/day, `gen_paused` kill switch.
+- **Josh's UX round shipped 07-13 (commits 084a284→bbeb6bb, verified live):** "🔔 Waiting on you" hero (big
+  click-to-enlarge images) + decision items auto-filed/closed on /todo + **board reconciler** (auto-closes
+  verifiably-done items — closed the stale spend-caps one; syncs board↔queue decisions both ways) + critic
+  addresses Josh/agent on AI cards (never "Andrea") + **"Request changes"**: Josh types plain English (can name
+  a library photo + text edits) → director applies it as top-priority (overrides critic, no round cap),
+  regenerates, rescores, returns to him at any score. Round-capped cards auto-promote to Josh (9 = goal, not gate).
+- **07-13 later: Josh REJECTED both CQ-15 (no note) + CQ-16 ("Ugly") — queue empty, prompting the loop
+  upgrade (commits ec29e02+799004d):** rejections now feed the director's evidence as the HIGHEST-authority
+  signal ("change the APPROACH, not details — premium editorial, not template collage") AND auto-fire a
+  replacement create; empty "Waiting on you" state explains itself. Today's 6-concept cap is spent —
+  **next batch (rejection-informed) lands at the 9am cron 07-14.** Detail: `MedGlo-marketing/NOTES.md`.
+
+**J — Ad coverage system (trace + gap-finder)** · *"Medglo - Ad Coverage"*
+- Blessed 07-13. Makes coverage itself the product: a trace agent (walk each ad brief→creative→Meta→page→form→GHL,
+  verify against SOURCE not another agent) + a weekly gap-finder (adversarial checklist-blind audit). 14 candidate
+  check-rows mined from NotFair → `reference/ad-coverage-gap-candidates.md`. **Do NOT OAuth Meta/GHL to 3rd-party tools.**
+- 🟢 **FIRST FULL TRACE RUN 07-21 — all 17 active ads, read-only, verified against live Meta / the live site / GTM /
+  GHL (never against a doc).** Josh's screenshot was RIGHT: the ES primary-care ad points at the EN page. 10 defects
+  filed as **/todo #116–#125**; raw evidence in `MedGlo-marketing/NOTES.md`. Headlines:
+  **#116** ES primary-care ad → EN `/primary-care/` (proved by rendering the live ad; `/es/atencion-primaria/` is fine).
+  **#117 worst:** `PICO_Laser_English_v1/v2` are dynamic-creative ads mixing 5 ES + 5 EN bodies AND Spanish **Botox**
+  copy inside the **Laser** campaign on the **PICO** form → 27 leads bait-and-switched, $355/30d, live now.
+  **#118** pixel `735…` (every ad set's optimization target) last fired **06-15**; the site fires `1216…` via
+  GTM-KKX33BKN; the GHL booking widget fires **nothing** → bookings invisible to Meta. **#121** Tattoo campaign ACTIVE
+  but both ads hard-blocked (Meta app Dev Mode) → $0 delivery while looking healthy.
+  ⚖️ **Self-correction logged (#119):** first filed as "the 20 queued ES creatives would launch at the EN homepage" —
+  re-checked and OVERSTATED. Both ES cards (CQ-302/329) are RT **lead-form** ads, so their stored `destination_url` is
+  a Meta placeholder and routes nobody. Card rewritten to say so. Real remaining issue for them = the missing ES form (#120).
+  **Verified CLEAN:** all 5 destinations resolve 200 · site treatment pages book the right calendar and never the dead
+  "Free Consultation" · form→GHL attribution is per-ad and treatment-correct (Botox/PICO/Tattoo each own a form+tag).
+  **NOT verified (disclosed, not guessed):** the old account `act_843962204029189` (token has no permission → #122)
+  and the Meta lead forms themselves (token lacks Page scopes → #123).
+- 🟢 **JOB 2 SHIPPED — the gates are permanent, not a one-off audit.** New `app/lib/routing-gate.ts` is a
+  DETERMINISTIC gate (never the LLM's judgment) run inside `scoreCreative`, so **every** internal ad hits it:
+  creative language ↔ live page `<html lang>` · destination resolves (fail CLOSED on 404/timeout) · the page books
+  that treatment's calendar and never the dead/discontinued ones · CTA maps to a real Meta enum. Re-verified again at
+  launch in `creative-launch.ts`. **`Reservar` fixed properly** — one shared ES+EN CTA map for the whole app (19
+  stored versions would have shipped LEARN_MORE). Retargeting launcher now **refuses** to put an ES ad on an EN form.
+  Proven live against real URLs: it blocks the exact screenshot defect and passes the corrected version.
+- **Needs Josh:** the 10 board cards — #116/#117/#118 first (live money + the mixed-language ads).
+
+**L — Retention Messenger (birthday + renewal drafts)** · *"Medglo - Growth Engine"*
+- 🟢 **LIVE (Engine ON). 2026-07-17:** (1) **fixed the 7:15am cron — it had never actually run**: launchd can't exec from `~/Downloads` (macOS TCC); runner moved to `~/Library/Application Support/com.medglo.retention/`, `install-launchd.sh` is now a deploy script. (2) **Birthday cadence → SEND ~7 DAYS AHEAD** (Josh: "time to get ready for your birthday"); weekend sends shift to the prior Friday; renewals skip weekends. Shipped commit 2bc0a8c → prod, verified live. **Josh item:** 11 patients w/ birthdays Jul 18–23 fell into the one-time switch gap (advance window already passed) — need a manual Andrea send this week; list in `MedGlo-marketing/NOTES.md`.
+- 🟡 BUILT + PROD-VERIFIED 07-16, awaiting Josh's ~6 min of GHL UI. Daily 7:15am run (launchd, Josh's Mac, writes
+  on **his Claude plan — no API credits**): birthday texts (gift tied to their usual treatment) + renewal reminders
+  (per-treatment intervals, usual day/time learned from real bookings, REAL open GHL slots, exactly 2 options).
+  **Delivery = GHL Manual Actions** (Josh's direction 07-16 chat): draft → `ai_draft_message` field + per-type tag →
+  the two "AI Drafts" workflows → Andrea clicks through in Conversations → Manual Actions; next-morning reconcile
+  marks sent + captures her edits. Nothing ever auto-sends. Prompts/lessons editable at **growth.med-glo.com/messages
+  → Train the AI** (Andrea + Dr. R). Guards verified on real prod data (21d quiet window, already-booked fails CLOSED,
+  DND/tags, once-per-cycle, cap 12/day, writer veto, discreet weight-loss). Josh ran 016 SQL + Vercel GHL keys ✅
+  (prod dry run #1: 9 candidates, 31 protected). Doc: `MedGlo-marketing/RETENTION-MESSENGER.md`.
+- ⚠ Naming: the ops hub's real domain is **growth.med-glo.com** — `ops.med-glo.com` (used across this file) is
+  NXDOMAIN. Josh to confirm which name should be canonical; brain references need a sweep after.
+- **v2 after Josh's review (07-16 night):** birthday gift now lives PER TREATMENT and goes to the most profitable
+  one a patient gets (seeded from the real `service_margins`, **Botox pinned last** — "we lose money on that
+  discount"; so Botox+HydraFacial → HydraFacial gift). Tattoo reminders OFF (⚠ KB says 4–6 sessions — Violeta to
+  confirm). **Fixed the incoherence Josh caught** ("you usually come Mondays… here's Tuesday"): slots now searched
+  14d out, only ever called "your usual day" when they truly are, + a **second independent reviewer pass** that
+  re-reads every draft against its facts and fixes/kills it (run aborts rather than ship unreviewed text). The
+  dashboard is **not an inbox** — send endpoint + sendSMS deleted; the app structurally cannot text a patient.
+  Custom-field write-by-key PROVEN on a live contact (admin customFields endpoint 403s on this token).
+- **Needs Josh (one /todo card):** run the **017 SQL** (amber banner on /messages has it) · build the 2
+  Manual-Action workflows (Birthday / Renewal Reminders) · Approve the sends decision · flip Engine ON via the
+  **badge at top-right of /messages**. Dr. Recalde: check intervals AND the new gift amounts/priorities.
+- NOTE: recurring routines do NOT go on /todo (Josh 07-16) — the board is for one-off jobs only; Andrea's daily
+  reviewing lives in Manual Actions itself. Her daily-routine card was deleted.
+
+**K (PROPOSAL) — Google search pilot + channel allocator** · *"Medglo - Google Pilot"* — NO SPEND without written OK
+- Ahrefs first pass: local money-term CPCs are cheap (botox near me $5, ~$35–125 projected cost/booked vs Meta's
+  $139–200) BUT local inventory is small (~$500–900/mo high-intent) → a FIRST-dollar channel, not a Meta replacement.
+- Pilot spec: **$20/day, 4–6 wks, search-only** on ~15 local terms, existing LPs + call tracking, judged on cost/booked.
+- **Needs Josh:** approve/reject the $20/day pilot (here or on /todo), then spin up the build session.
 
 ---
 
-## NEEDS JOSH (cross-cutting)
-- The concrete **GOAL number**.
-- **Fix the website:** remove **CareCredit** everywhere — you only accept **Cherry** (Dr. Recalde flagged
-  this in April; site still lists CareCredit). Already corrected in the bot KB.
-- Ops fix until the bot is live: **15-min reply SLA** on lead questions + a **7–8pm inbox sweep** (leads
-  text evenings; replies currently go out ~11am next day — the 15.5h lag is the #1 booking leak).
+## NEEDS JOSH — cross-cutting (not stream-specific)
+- The concrete **GOAL number** (see THE ONE GOAL).
+- **Website fix:** remove **CareCredit** everywhere — you only accept **Cherry** (flagged April; site still lists
+  it; already corrected in the bot KB).
+- **Ops SLA until the bot fully covers:** 15-min reply on lead questions + a **7–8pm inbox sweep** (leads text
+  evenings; the ~15.5h reply lag is the #1 booking leak).
 
-## RECENTLY DONE (2026-07-08, Dashboard Data Audit session)
-- Full pipeline audit (all steps verified to source) + invoice-engine rewrite + overnight
-  historical backfill of every patient's paid-invoice history. Revenue/ROAS now real.
-  Details: Stream A above + `MedGlo-marketing/NOTES.md`.
-
-## RECENTLY DONE (this session, 2026-07-06/07)
-- Ad audit + 4 ad kills executed; Supabase tables created + follow-up sync run; dashboard upgraded
-  (follow-up health, $/booked, coverage banner).
-- New ad creative + production guide written; GHL bot KB built (site crawl + team-WhatsApp mining).
-- Primary-care funnel approved + website PR #103 merged.
-- Website rebuilt Mar 2026 (`MedGlo-website/MEDGLO_BLUEPRINT.md`); VoC study → `Competition/message-playbook.md` (voice LAW).
+## Where the detail lives (loaded only when a stream session needs it)
+- **`now-archive.md`** — full per-stream detail + completed-work history + the pre-refactor snapshot (not auto-loaded).
+- Each stream's workshop doc — `MedGlo-marketing/NOTES.md`, `PROJECT_STATUS.md`, `AD-RESCUE-PLAN.md`,
+  `ghl-ai-bot/`, `primary-care/`, etc.
+- **`reference/focus-group-findings.md`** · **`reference/ad-coverage-gap-candidates.md`**.
