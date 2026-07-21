@@ -123,9 +123,18 @@ approvals before acting on gated work.
   - So Meta was asked for the cheapest clicks and delivered: **931 landing-page views @ $0.10, 975 clicks,
     ZERO leads in GHL since May 1** (224 account leads in that window, none from PC).
   - Best PC ad by CTR is *"Your patient being funny"* at **14.9%** with 0 bookings — clicking for the joke.
-  - **The landing page fires no Meta pixel at all** (`fbq`/`fbevents` absent; GTM only) — so even switching the
-    objective gives Meta nothing to learn from. Compounds the dead-pixel cards #92/#118.
-  - Page itself is healthy: 200, correct GHL calendar `medglo-consultation0rogcm`, phone links present.
+  - **Tracking mismatch (corrected 07-21 after runtime check):** the page DOES fire a Meta pixel via GTM —
+    **1216142767065419** — but the ad sets optimise against **735160882802353**. *The pixel that fires and the
+    pixel Meta learns from are different pixels.* That's cards #118/#92, and it's why this page has never taught
+    Meta anything. (An earlier raw-HTML check wrongly concluded "no pixel at all" — GTM injects it at runtime.)
+- **The landing page is also a conversion problem (Josh 07-21: "a landing page that is awful") — /todo #140,
+  rebuild with Google Stitch.** Measured on mobile: **15.9 phone screens tall**, **2 images on the whole page**
+  and none of Dr. Recalde above the fold, every CTA reads "Request a Consult" (med-spa language), no availability
+  signal above the fold, insurance reduced to a small badge, and **nothing books on the page** — every CTA jumps
+  to `go.med-glo.com/widget/bookings/medglo-consultation0rogcm` on another domain, i.e. the booking happens where
+  the tracking isn't. Bones are fine (structure, honest copy, correct calendar, ES page exists); the *skin* is the
+  aesthetics brand selling the wrong job. Copy rewrite waits on the VoC research; layout/pixel work can start now.
+  Source is in-repo: `MedGlo-website/src/pages/primary-care` + `/es/atencion-primaria` (Astro).
 - **Josh's call 07-21: STOP and research first** — *"I'm absolutely at a loss of what women are looking for…
   we need to discover what their pain is before we build a funnel. Maybe the brain already knows."*
   **It does not.** All VoC + the whole focus-group panel are aesthetics; Nadia's dossier says so outright.
