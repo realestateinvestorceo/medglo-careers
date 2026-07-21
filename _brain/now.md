@@ -17,6 +17,22 @@ don't let a stream block grow back into a changelog.**_
 (MedGlo root) holds the picture + reviews weekly. Opening a stream session = read that stream's block below
 + its workshop doc, stay in that lane.
 
+## ⚖️ STANDING AUTHORIZATION — CUT IS AUTHORIZED, GROW IS NOT (Josh, written, 2026-07-21)
+> *"well close those. I don't understand why you need to ask my permission for obvious money wasters, that is
+> the entire job of the agent. To be clear, this task list is only for decisions or task that an agent cannot do."*
+
+**This is Josh's written OK and supersedes the blanket "no ad changes without approval" for cut/repair work.**
+- ✅ **No approval needed — just do it, then report:** pause / stop / kill / repair anything wasting money or
+  **misrouting patients**. Reversible, cut-only actions. Log every change with exact prior state (Stream F's
+  `agent_changes` convention) so it's one-click revertible.
+- ⛔ **Still needs Josh's explicit OK:** raising budgets · launching new ads · changing targeting · anything that
+  messages a real patient. **`allow_new_ads` stays OFF.**
+- 📋 **The /todo board is ONLY for decisions or tasks an agent genuinely CANNOT do.** If an agent could have done
+  it, the agent does it and closes the card. Don't park work there for Josh that you could have finished.
+- 🔍 **Judgment exception (learned 07-21):** "cut it" doesn't mean "act without checking". If verifying a
+  supposedly-safe repair shows it has a real downside, STOP and put it back to Josh with the evidence —
+  that's a decision, not a money-waster. (Case in point: the pixel switch, /todo #118.)
+
 **TO-DO BOARD (2026-07-12): every human task/decision lives at `ops.med-glo.com/todo`, NOT in chat.**
 Grouped by person (Josh / Andrea / Dr. Recalde), scored 1–10, numbered steps, Done + Approve/Reject buttons
 (**an Approve there = Josh's written authorization, logged**). All sessions: when you need something from a
@@ -51,7 +67,10 @@ Conditions, all still binding:
   handover on. Tested 15 EN+ES scenarios; never quotes gated prices, no medical advice.
 - **Needs Josh:** promo number ($9 vs $9.99) · deposit timing · min age · is GLP-1 med cost in the $450? ·
   chem-peel/glutathione/peptide prices. Send Andrea the guide (`ghl-ai-bot/ANDREA-MONITORING-GUIDE.md`).
-- ⚠️ Public booking page still offers "Salmon DNA & Vampire Facial" but staff say NO — rename/remove that calendar.
+- ✅ **07-21 CORRECTION (Stream J verified the live page):** the public booking page `/book/` does **NOT** offer
+  "Salmon DNA & Vampire Facial" any more — that warning was stale. Both Salmon calendars (+ the dead "Free
+  Consultation") are still ACTIVE in GHL but **orphaned** — nothing on the site links to them. Remaining job is
+  GHL-side cleanup + confirming the bot's KB doesn't offer Salmon either → /todo #124.
 
 **C — Meta ad improvements** · *"Medglo - Meta Ads"* · gate released 07-08
 - 4 wasteful ads killed 07-06 (~$1k/mo stopped). New creative APPROVED (anti-upsell / natural-results /
@@ -305,7 +324,24 @@ Conditions, all still binding:
   launch in `creative-launch.ts`. **`Reservar` fixed properly** — one shared ES+EN CTA map for the whole app (19
   stored versions would have shipped LEARN_MORE). Retargeting launcher now **refuses** to put an ES ad on an EN form.
   Proven live against real URLs: it blocks the exact screenshot defect and passes the corrected version.
-- **Needs Josh:** the 10 board cards — #116/#117/#118 first (live money + the mixed-language ads).
+- 🟢 **ACTED 07-21 under the new standing authorization (all reversible, prior state logged in `agent_changes`):**
+  **PAUSED** `PICO_Laser_English_v1` + `v2` (#117 — the mixed-language / mixed-treatment ads, $169 in their last
+  7d) · **PAUSED** the `MedGlo_Tattoo_Removal_Leads_2026` campaign (#121 — $0 delivery, both ads hard-blocked;
+  ⚠ **reactivation is MANUAL once Dev Mode is fixed**) · cards #116/#117/#119/#121 CLOSED.
+  ⚠ **Live-state correction:** another session paused the WHOLE `Primary_Care_Practice_Traffic` campaign (all 5
+  ads) at 16:54Z on 07-21 per Josh's approval of #139 — so the ES primary-care ad (#116) was ALREADY off when I
+  went to pause it; I stopped nothing there. **The account is now 10 active ads (Botox 7 + Laser 3), not 17** —
+  the audit's ad list above is a 07-21-morning snapshot.
+- ⏸ **#118 DELIBERATELY NOT DONE — reported back instead.** Josh called the pixel switch "pure repair with no
+  downside"; verifying it showed otherwise. Both live lead ad sets are `destination_type=ON_AD` +
+  `QUALITY_LEAD` (Meta INSTANT FORM), so the conversion is on-platform and `promoted_object.pixel_id` is
+  vestigial for them — while changing `promoted_object` IS a Meta "significant edit" that resets learning. So
+  the switch would relearn two lead-producing ad sets for ~no benefit. The real hole (GHL booking widget fires
+  no pixel → bookings invisible to Meta) is a GHL settings change our token can't reach. Card rewritten as a
+  decision with the evidence.
+- **Needs Josh:** #118 (pixel call) · #120 (Spanish lead form) · #121-followup (Meta app **Dev Mode** — it now
+  blocks the Tattoo ads AND any rebuild of the ES primary-care/PICO ads) · #122/#123 (things only he can do) ·
+  #124/#125 (sharpened, both are real decisions not cuts).
 
 **L — Retention Messenger (birthday + renewal drafts)** · *"Medglo - Growth Engine"*
 - 🟢 **LIVE (Engine ON). 2026-07-17:** (1) **fixed the 7:15am cron — it had never actually run**: launchd can't exec from `~/Downloads` (macOS TCC); runner moved to `~/Library/Application Support/com.medglo.retention/`, `install-launchd.sh` is now a deploy script. (2) **Birthday cadence → SEND ~7 DAYS AHEAD** (Josh: "time to get ready for your birthday"); weekend sends shift to the prior Friday; renewals skip weekends. Shipped commit 2bc0a8c → prod, verified live. **Josh item:** 11 patients w/ birthdays Jul 18–23 fell into the one-time switch gap (advance window already passed) — need a manual Andrea send this week; list in `MedGlo-marketing/NOTES.md`.
