@@ -174,11 +174,28 @@ approvals before acting on gated work.
   *"almost two months… couldn't get a call back"*, *"most of their doctors are not taking new patients"*), **days
   is the wedge** — and it's precisely what the concierge practices in this catchment charge a membership for.
   MedGlo does it **on insurance, no membership.** On the rebuild it goes **above the fold**, not in an FAQ.
-- **Needs Dr. Recalde (/todo #142, now score 9 — gates all PC copy):** the honest number we can commit to in
-  writing ("usually seen within X days") and whether it holds on a normal week alongside aesthetics · the same
-  for **sick visits** (today/tomorrow? materially stronger claim, state separately) · what PC patients said at
-  intake · are all listed carriers genuinely in-network · the cash price vs the concierge set.
-  ⚠ Whatever we print becomes a promise; broken access promises are exactly what patients savage competitors for.
+- ✅ **ANSWERED by Dr. Recalde 07-21 (via Josh, verbatim):** *"Normally she will see folks the SAME DAY. These
+  are short 20-minute visits and she can fit in between patients. Sometimes, on rare occasions, it's the next
+  day. She also sees urgent care cases, in which case it can be right away. She was concerned we don't say that
+  for **Sundays** — she doesn't work Sundays."*
+- ⚠️ **BUT THE BOOKING PATH CONTRADICTS IT — verified on the live widget 07-21 (/todo #143):**
+  - **A patient cannot book same-day online.** Today is greyed out — **and so is today on the Botox calendar**,
+    so it's practice-wide, not a PC setting. Either genuinely full (fits "booked solid this week") **or a GHL
+    minimum-scheduling-notice rule that structurally blocks same-day forever.** Different fixes; can't tell from
+    outside. **This is the one thing to check.**
+  - **The Medical Consultation calendar is 30-min slots; she says 20** (Botox is already 20). The calendar
+    reserves 50% more time than she needs on every booking → **30→20 creates ~50% more PC slots from the same
+    hours, free.**
+  - ✅ Correct already: **Sundays closed on both calendars** (exactly as she asked) · her **Jul 27–Aug 2 vacation
+    blocked** · **August wide open (~21 bookable days)**. Jul 23–25 full = consistent with "booked solid".
+  - ❓ Mon **Aug 3** (her stated return) is NOT bookable while Aug 4+ is · Weds Aug 12/19/26 closed while Aug 5 open.
+- 💡 **Likely right framing: the PHONE is the same-day channel; the widget is the planned-visit channel.** She
+  fits people in *between* patients — a human decision, not a calendar slot. So the page says ~*"call and we'll
+  usually see you today or tomorrow"* on **(949) 676-7313**, with online booking for planned visits. Honest,
+  deliverable today with zero config changes, routes highest-intent people to a human. Must read as reassurance
+  ("you won't have to wait"), **never urgency** — playbook rule.
+- **Still gates the copy (/todo #142):** what PC patients said at intake · are all listed carriers genuinely
+  in-network · the cash price vs the concierge set · Josh's OK on the phone-for-same-day framing.
 - **Provisional value bar (Josh's guess, NOT verified):** $150–250/visit, return rate unknown, "feeling they
   will". Checkout data can't settle it — "Medical Consultation" shows avg **$49** (the copay); insurance
   reimbursement never enters this system. **Needs Dr. Recalde's real per-visit reimbursement + return rate.**
