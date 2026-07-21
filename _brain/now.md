@@ -23,6 +23,18 @@ Grouped by person (Josh / Andrea / Dr. Recalde), scored 1–10, numbered steps, 
 human, INSERT an `action_items` row via the service key instead of asking in chat; check the board for
 approvals before acting on gated work.
 
+**COMMITTING IS PRE-AUTHORIZED (Josh, 2026-07-21) — don't ask.** Any session may `git commit` **and push
+to `main`** (= Vercel auto-deploy) for work Josh asked for, without stopping for permission. Don't leave a
+finished fix sitting uncommitted for a "may I?" — an uncommitted fix isn't live, so asking just delays it.
+Conditions, all still binding:
+- **Stage only what this session changed** (`git add <paths>`, never `git add -A`) — these repos usually
+  have other sessions' work-in-progress in the tree. Never commit someone else's dirty files.
+- **It has to build** — typecheck/verify before committing, and say plainly if something failed.
+- **Report what you pushed** so it's in the transcript.
+- This covers CODE ONLY. It does **not** loosen START-HERE rule 3: money out, ad-budget changes, launching/
+  editing live ads, and anything a real patient receives still need Josh's written OK (the /todo Approve).
+  Shipping the code that *would* do one of those is fine while the thing itself stays paused/gated.
+
 ---
 
 ## STREAM STATUS (one block each — full detail in `now-archive.md` + the named workshop docs)
