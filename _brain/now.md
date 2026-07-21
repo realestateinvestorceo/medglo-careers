@@ -89,6 +89,27 @@ approvals before acting on gated work.
   spend until it fits), + the future new-ad launch path refuses over-cap launches. **Verified by live dry run;
   FINDING: yesterday was $136 → agent's raises are NOW frozen and it will trim weakest ads toward $100/day
   (~$-250/wk vs the $850 ceiling). If Josh meant a looser guard, raise the number at /agent.**
+- ✅ **BUDGET → SLOTS, live 07-21** (Josh: "the agent needs to understand our total operating budget, when to
+  release new creatives, max number of ads running at once — I think this part of the strategy has been
+  completely missed"). He was right: the system had ceilings and a per-ad MAX but **no per-ad MINIMUM and no
+  count of running ads**. Result: **17 ads on $43/day**, and Meta concentrates rather than splitting evenly —
+  over the 14d to 07-20, **$380 of $1,439 (26%) went to ads that produced zero leads**, mostly too thinly
+  funded to ever be judged (Primary Care: all 5 ads, $94, 0 leads — $5/day over 5 ads at a $20.21 CPL cannot
+  produce anything). New model in `lib/capacity.ts`: **budget buys SLOTS; a slot is one ad given enough money
+  to be judged** = `min_leads_to_judge`(3) × blended CPL over the learning window ≈ **$30/wk per ad**, computed
+  **per budget holder** (that's where Meta divides it). Today: $245/wk delivering → **7 funded slots vs 17 ads
+  running**. Visible at /agent ("What this budget actually buys"), and on /creative next to Approve so the
+  limit is known at decision time. New settings: `min_leads_to_judge` `min_weekly_per_ad`(0=auto)
+  `max_ads_per_campaign`(4) `test_slot_share_pct`(33).
+- 🐛 **Found + fixed by the new gate:** the creative launch path checked only `daily_spend_ceiling` (default
+  $100) and **ignored `weekly_spend_ceiling`** — at today's $300/wk it would have waved through a $75/wk test
+  ad, i.e. exactly the runaway Josh feared. Dormant only because `allow_new_ads=0`. `canReleaseNewAd()` now
+  checks the weekly ceiling, free test slots, and the per-campaign slot count. ⚠ **Still to wire into
+  `lib/creative-launch.ts` itself** — that file is held by the parallel Stream J session; do it once they land.
+- 📌 **JOSH'S WRITTEN OK, 07-21 — ad budget ramp.** Dr. Recalde **out Jul 27 – Aug 2, back Mon Aug 3**.
+  Hold **$300/wk now**; **ramp to $600/wk on Fri Jul 25** and run it through her absence so the ~9-day median
+  lead→booked lag lands the pipeline in her first week back. Excess ads: **the agent proposes a pause list,
+  Josh approves — never auto-pause.** (Execution card on /todo; nothing changed on Meta yet.)
 - **Needs Josh (optional, to enable auto-scaling):** set `weekly_ceiling_max` ($2.5–3.5k) + `capacity_visits_week`
   (Dr. R's true weekly ceiling) at /agent; approve the viral-reel-boost brief. Detail: `MedGlo-marketing/NOTES.md`.
 
