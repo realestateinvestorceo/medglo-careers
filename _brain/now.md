@@ -109,7 +109,35 @@ approvals before acting on gated work.
 - 📌 **JOSH'S WRITTEN OK, 07-21 — ad budget ramp.** Dr. Recalde **out Jul 27 – Aug 2, back Mon Aug 3**.
   Hold **$300/wk now**; **ramp to $600/wk on Fri Jul 25** and run it through her absence so the ~9-day median
   lead→booked lag lands the pipeline in her first week back. Excess ads: **the agent proposes a pause list,
-  Josh approves — never auto-pause.** (Execution card on /todo; nothing changed on Meta yet.)
+  Josh approves — never auto-pause.** (Execution card /todo #135; nothing changed on Meta yet.)
+  Allocation at $86/day: Botox $50 · Laser $25 · Retargeting $11 (only if #91 approved) · **PC $0** · Tattoo $0
+  (blocked, #121). ⚠ With only 2–3 healthy campaigns, $600/wk concentrates to ~$75/wk per ad — well above the
+  $30 floor, which is *why turning retargeting on matters*: it gives the money a third place to work.
+
+**🩺 PRIMARY CARE — the ad funnel is BROKEN, and it is not a budget problem (07-21)**
+- Josh: *"let's fund properly to test, we really want to get the primary care clinic going"* → investigated
+  before spending, and found **more money would buy more of the wrong thing:**
+  - **The campaign that exists is not the one that was specced.** `primary-care/CAMPAIGN-SPEC.md` called for
+    `MedGlo_PrimaryCare_Leads_2026` on a **LEADS** objective. What got built is `Primary_Care_Practice_Traffic`,
+    **OUTCOME_TRAFFIC optimising LANDING_PAGE_VIEWS with no `promoted_object`** — no pixel, no conversion event.
+  - So Meta was asked for the cheapest clicks and delivered: **931 landing-page views @ $0.10, 975 clicks,
+    ZERO leads in GHL since May 1** (224 account leads in that window, none from PC).
+  - Best PC ad by CTR is *"Your patient being funny"* at **14.9%** with 0 bookings — clicking for the joke.
+  - **The landing page fires no Meta pixel at all** (`fbq`/`fbevents` absent; GTM only) — so even switching the
+    objective gives Meta nothing to learn from. Compounds the dead-pixel cards #92/#118.
+  - Page itself is healthy: 200, correct GHL calendar `medglo-consultation0rogcm`, phone links present.
+- **Josh's call 07-21: STOP and research first** — *"I'm absolutely at a loss of what women are looking for…
+  we need to discover what their pain is before we build a funnel. Maybe the brain already knows."*
+  **It does not.** All VoC + the whole focus-group panel are aesthetics; Nadia's dossier says so outright.
+  → VoC research running → `Competition/voice-of-customer-primary-care.md` (his wait-time hypothesis is the
+  headline thing to confirm or kill). **No PC funnel or spend until it lands.**
+- **Provisional value bar (Josh's guess, NOT verified):** $150–250/visit, return rate unknown, "feeling they
+  will". Checkout data can't settle it — "Medical Consultation" shows avg **$49** (the copay); insurance
+  reimbursement never enters this system. **Needs Dr. Recalde's real per-visit reimbursement + return rate.**
+- **Needs Josh:** approve pausing the PC campaign pending the rebuild (**/todo #139**, saves ~$150/mo of junk
+  traffic; page/calendar/phone stay live). Note the original spec judged the highest-yield PC action to be
+  **telling existing aesthetic patients she does primary care and takes insurance** — not ads; that messages
+  real patients, so it needs its own OK.
 - **Needs Josh (optional, to enable auto-scaling):** set `weekly_ceiling_max` ($2.5–3.5k) + `capacity_visits_week`
   (Dr. R's true weekly ceiling) at /agent; approve the viral-reel-boost brief. Detail: `MedGlo-marketing/NOTES.md`.
 
