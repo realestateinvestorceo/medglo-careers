@@ -60,6 +60,19 @@ Conditions, all still binding:
   coverage 97–100%/mo, all-time captured revenue $994k, attributed ad revenue $98k / 151 leads, blended 90d
   ROAS **1.83x**, cost/booked ~$200. Per-ad revenue now reliable ("$1,680 Mistake" 12.4x · La Doctora 0.7x kill).
 - Caveats: "booked" includes ~5% cancels (use "showed"); newest ~2wk under-counts (judge on 90d); `monthly_costs` empty.
+- ✅ **07-24 — four silent revenue-loss bugs found + fixed** (medglo-analytics `7e13d80`). Triggered by "what did we
+  make today?", which the dashboard answered **$0** on a **$4,964** day. (a) patient-id lookup via the EMR's select2
+  widget dies after ~6 lookups per session — everyone queued behind it was skipped with only a WARNING, so the run
+  still exited green (live: 6/32 resolved); now a bulk `/patients?page=N` crawl → **50/50**. (b) processed-patient
+  markers were saved mid-loop but invoices only upsert at the end, so any crash/CI cancel marked patients done with
+  their money never written **and never retried**; markers now commit only after the upsert. (c) state dirs were
+  CWD-relative → running from the project root forked the id cache into a second empty copy. (d) only 'checked out'
+  visits were invoice-checked, so a visit staff never closed out was invisible forever; 'checked in' now queues too.
+  CI now **fails** on the `UNRESOLVED PATIENTS` line so coverage loss can't decay quietly again.
+- ✅ **Evening scrape added** (9 PM PT, alongside 6 AM). Same-day revenue was structurally unanswerable before:
+  on 07-24 the 6am run saw **2** appointments; **23** by close of business — same-day bookings are most of the day.
+- ⚠️ **Suspect earlier months.** Bugs (a)+(b) mean past invoice coverage may be worse than the 97–100% recorded on
+  07-08. Worth a `backfill_invoices.py` re-run now that resolution works, before trusting historical ROAS.
 - **Needs Josh:** payroll / rent / product-COGS % for `monthly_costs`. Detail: `MedGlo-marketing/NOTES.md`, `PROJECT_STATUS.md`.
 
 **B — GHL AI booking bot** · *"Medglo - GHL AI Bot"*
