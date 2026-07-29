@@ -389,6 +389,30 @@ Conditions, all still binding:
 - Pilot spec: **$20/day, 4–6 wks, search-only** on ~15 local terms, existing LPs + call tracking, judged on cost/booked.
 - **Needs Josh:** approve/reject the $20/day pilot (here or on /todo), then spin up the build session.
 
+**M — Fill the empty treatment room (hiring, not leasing)** · *"Medglo - Growth Engine"* · `/hiring` board built 2026-07-28
+- Problem: the facial room is used **Fridays only**, empty the other 6 days. Goal is utilization **plus** more of the
+  right people walking in — Josh explicitly fine with breaking even.
+- Josh's first framing was **leasing the room** cheaply to an outside brow/lash/facial pro. **Scrapped same day** —
+  below-FMV rent given *because* we expect referrals is the textbook **B&P 650** violation (applies to cash-pay
+  aesthetics, no federal money needed; and PC now bills Medicare → federal AKS too).
+- **DECIDED (Josh, 07-28): hire one licensed specialist** in an overlapping niche (facials / brows / lashes).
+  Two hard rules, now printed on the board and in the seed migration:
+  1. **Part-time W-2, not 1099.** CA's AB5 esthetician exemption only holds if the worker sets their own prices and
+     is paid directly by clients — paying hourly on our schedule fails every prong (misclassification exposure).
+  2. **Never pay them anything tied to referrals into Botox/filler/semaglutide.** Commission on their *own* service
+     revenue only. Fee-splitting with a non-physician = Dr. Recalde's license.
+- Menu guardrail: facials/HydraFacial, superficial peels (≤30%), dermaplaning-as-exfoliation, wax, brows, lashes.
+  **Not** microneedling, medium/deep peels, or medical lasers — not delegable to an esthetician in CA at any level
+  of supervision. PMU additionally needs the **room** permitted as a body-art facility (OC HCA).
+- Recommended niche order: **facialist** (idle HydraFacial + best on-ramp to injectables) → **brows** (best hourly
+  margin + frequency) → **lashes**. Start **2 days/week**, not 6 — hourly means we pay for an empty chair.
+- Built: `/hiring` tab (Andrea has access), 33 seeded leads, 8-question screener, feedback loop into the next batch.
+  Raw detail: `Medglo - Growth Engine/NOTES.md`.
+- **Needs Josh:** (1) run `019_hiring.sql` in Supabase to activate the board; (2) set the **hourly range + commission %**
+  before Andrea quotes anyone; (3) confirm the current **Friday facial person's** arrangement — if she's 1099-hourly
+  today the misclassification problem already exists and this fixes it; (4) decide whether we'd ever permit the room
+  for body art (gates the whole PMU tier of leads).
+
 ---
 
 ## NEEDS JOSH — cross-cutting (not stream-specific)
