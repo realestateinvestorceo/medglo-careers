@@ -153,10 +153,41 @@ Conditions, all still binding:
 - 📌 **JOSH'S WRITTEN OK, 07-21 — ad budget ramp.** Dr. Recalde **out Jul 27 – Aug 2, back Mon Aug 3**.
   Hold **$300/wk now**; **ramp to $600/wk on Fri Jul 25** and run it through her absence so the ~9-day median
   lead→booked lag lands the pipeline in her first week back. Excess ads: **the agent proposes a pause list,
-  Josh approves — never auto-pause.** (Execution card /todo #135; nothing changed on Meta yet.)
-  Allocation at $86/day: Botox $50 · Laser $25 · Retargeting $11 (only if #91 approved) · **PC $0** · Tattoo $0
-  (blocked, #121). ⚠ With only 2–3 healthy campaigns, $600/wk concentrates to ~$75/wk per ad — well above the
-  $30 floor, which is *why turning retargeting on matters*: it gives the money a third place to work.
+  Josh approves — never auto-pause.**
+- ⚠️ **THAT RAMP NEVER HAPPENED — caught + executed 2026-07-30.** The ceiling stayed at **300** with the
+  07-19 "lower spend for her absence" note; cards #135/#109 sat open; the agent had cut to $43/day on 07-20
+  and crept back only 20%/wk. Account spend went **~$105/day (Jun 30–Jul 19) → ~$26–42/day (Jul 20–29)**, so
+  the pipeline meant to land in her first week back was never bought. **Lesson: a dated ramp parked on the
+  /todo board is not a scheduled action — nothing executes it.**
+- ✅ **RAMP EXECUTED 2026-07-30** (Josh in session: *"Violeta is coming back next week, let's increase the ad
+  spend… make sure we turn on the right ads"*; he approved budget level, restructure, and the PICO_v2 call).
+  **Account now $86/day = $602/wk, 7 active ads.** `weekly_spend_ceiling` **300 → 600**. All changes in
+  `agent_changes` **#73–81** with prior state → one-click revert at /agent.
+  - **Botox $24 → $74/day** (holds every proven booker: 65 bookings on $7,841 over 180d, $121 ea) —
+    Skip the Chains · $1,680 Mistake · Subtle enhancements · **"No Pressure" #3 reactivated**.
+  - **Laser HELD at $12/day on purpose** (not an oversight — see the PICO_v2 line below).
+  - **7 ads paused**, all starved-or-losing: Preventative Botox · Elevated #8 · Natural #9 · Refresh Not
+    Frozen #7 (those three got ~$1/day for 16 days — untested, not failed) · In aesthetics precision
+    ($204/booked) · Did you know Pico ($60 CPL) · No surgery No downtime.
+  - **`"No Pressure" #3` was a FALSE-NEGATIVE KILL.** The agent paused it 07-12 for "zero matured bookings";
+    those leads then booked — July **3 bookings on $324 = $108 ea, 3.4x**. The agent won't undo its own kill
+    inside 30 days ("not flip-flopping"), so reversing a bad kill needs a human. Worth remembering.
+  - Justification: value ceiling **$222/booked** vs actual **$139**; 180d **3.54x, $131/booked, 97% show**;
+    and the highest-spend month was the *most* efficient (Mar $2,181 → 32 booked @ $68, 8.40x). Audience
+    423k–498k in 15mi, reach only 0.8% of it, frequency 2.79, CTR rising → no fatigue, no audience ceiling.
+  - Timing check (live GHL): **Aug 3 = 0 bookable slots, Aug 4–8 = 14 total, Aug 10–15 = 60**; measured
+    lead→booked lag **median 10.0d** (n=142) → money spent now lands in the empty week. Correctly aimed.
+- 🚨 **`PICO_Laser_English_v2` — the account's best ad ($73/booked) is STILL defect #117, and it's live.**
+  Read its `asset_feed_spec` 07-30: bodies 0–3 are Spanish **BOTOX** copy ("$180 por 20 unidades"), bound by
+  `asset_customization_rules` to **audience_network + facebook**, inside the **Laser** campaign on the
+  **PICO** form. The audit paused it 07-21; something turned it back on. Its cheap bookings are partly
+  *because* it runs Botox hooks. **The corrected EN-only feed is built and passes Meta's validation — and is
+  then refused: _"Ads creative post was created by an app that is in development mode."_** Since a CBO ad set
+  has no per-ad budget cap, the ONLY lever that stops it scaling is not raising Laser — hence $12/day.
+- 🔴 **/todo #104 (Meta app → Live mode) is now the top blocker, score 10 — Josh-only.** It blocks three
+  things at once: the 30+ approved-pending creatives can't launch · the #117 fix can't ship · and Laser stays
+  frozen because of it. **Retargeting is also not a lever**: `MedGlo_Retargeting_2026-07` has two ad sets and
+  **zero ads in it**, and creating them hits the same wall. Until #104 clears, $602/wk runs through 7 ads.
 
 **🩺 PRIMARY CARE — the ad funnel is BROKEN, and it is not a budget problem (07-21)**
 - Josh: *"let's fund properly to test, we really want to get the primary care clinic going"* → investigated
@@ -416,6 +447,10 @@ Conditions, all still binding:
 ---
 
 ## NEEDS JOSH — cross-cutting (not stream-specific)
+- 🔥 **This week, because the ramp is now live and aimed at Aug 10+:** #104 Meta app → Live mode (unblocks
+  everything creative) · #143 **Aug 3, her first day back, is still not bookable on any calendar** · #201
+  approve Andrea working the **32 leads from Jul 16–30 that never booked** (the calendar had nothing to sell
+  them while she was out — warm, already paid for, cheapest bookings available next week).
 - The concrete **GOAL number** (see THE ONE GOAL).
 - **Website fix:** remove **CareCredit** everywhere — you only accept **Cherry** (flagged April; site still lists
   it; already corrected in the bot KB).
