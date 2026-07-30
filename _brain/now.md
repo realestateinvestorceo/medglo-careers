@@ -184,6 +184,10 @@ Conditions, all still binding:
   *because* it runs Botox hooks. **The corrected EN-only feed is built and passes Meta's validation — and is
   then refused: _"Ads creative post was created by an app that is in development mode."_** Since a CBO ad set
   has no per-ad budget cap, the ONLY lever that stops it scaling is not raising Laser — hence $12/day.
+- ✅ **Density stays ON (Josh, 07-30: "ya keep it running").** The RF/Density launch ad has $1 lifetime spend,
+  and Laser at $12/day funds 2 slots while running 3 — so **/agent's capacity card will keep proposing "pause
+  1 ad". That is settled, not an open question: don't act on it and don't re-ask him.** It's live but can't
+  be judged at this funding; it gets a real read when #104 clears and Laser unfreezes.
 - 🔴 **/todo #104 (Meta app → Live mode) is now the top blocker, score 10 — Josh-only.** It blocks three
   things at once: the 30+ approved-pending creatives can't launch · the #117 fix can't ship · and Laser stays
   frozen because of it. **Retargeting is also not a lever**: `MedGlo_Retargeting_2026-07` has two ad sets and
